@@ -938,6 +938,148 @@
         max-width: min(34em, 100%);
       }
 
+      .cycle-pill {
+        position: relative;
+        display: inline-flex;
+        vertical-align: middle;
+        box-sizing: border-box;
+        height: 1.42em;
+        margin-block: 0.2em;
+        overflow: visible;
+        border-radius: 999px;
+        background: #2e2e2e;
+        color: #ffffff;
+        line-height: 1;
+        white-space: nowrap;
+        transition: width 450ms var(--ease-in-out);
+      }
+
+      .cycle-pill-measure,
+      .cycle-pill-row {
+        display: flex;
+        align-items: center;
+        gap: 0;
+        padding: 0 0.55em 0 1.98em;
+        white-space: nowrap;
+      }
+
+      .cycle-pill-sticker {
+        position: absolute;
+        z-index: 2;
+        top: 50%;
+        left: 0.06em;
+        width: 1.82em;
+        height: 1.82em;
+        transform: translateY(-50%);
+        pointer-events: none;
+      }
+
+      .cycle-pill-sticker .cycle-pill-icon {
+        position: absolute;
+        inset: 0;
+        opacity: 1;
+        transition: opacity 450ms var(--ease-in-out);
+      }
+
+      .cycle-pill-sticker .cycle-pill-icon + .cycle-pill-icon {
+        opacity: 0;
+      }
+
+      .cycle-pill-sticker.is-swapped .cycle-pill-icon:first-child {
+        opacity: 0;
+        transition-duration: 280ms;
+      }
+
+      .cycle-pill-sticker.is-swapped .cycle-pill-icon:last-child {
+        opacity: 1;
+      }
+
+      .cycle-pill-icon.is-pop {
+        transform-origin: center;
+        transition: none;
+        animation: cycle-sticker-pop 0.7s linear both;
+      }
+
+      @keyframes cycle-sticker-pop {
+        0% {
+          opacity: 0;
+          transform: scale(0.72) rotate(var(--sticker-from));
+          animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        71.43% {
+          opacity: 1;
+          transform: scale(1.16) rotate(var(--sticker-peak));
+          animation-timing-function: cubic-bezier(0.55, 0, 0.85, 0.25);
+        }
+
+        100% {
+          opacity: 1;
+          transform: scale(1) rotate(var(--sticker-rest));
+        }
+      }
+
+      .cycle-pill-sticker.is-instant .cycle-pill-icon {
+        transition: none;
+      }
+
+      .cycle-pill-measure {
+        position: absolute;
+        width: max-content;
+        visibility: hidden;
+        pointer-events: none;
+      }
+
+      .cycle-pill-viewport {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+      }
+
+      .cycle-pill-track {
+        display: flex;
+        flex-direction: column;
+        transition: transform 450ms var(--ease-in-out);
+      }
+
+      .cycle-pill-track.is-slid {
+        transform: translateY(-1.42em);
+      }
+
+      .cycle-pill-track.is-instant,
+      .cycle-pill-track.is-instant .cycle-pill-row {
+        transition: none;
+      }
+
+      .cycle-pill-row {
+        height: 1.42em;
+        flex: none;
+        opacity: 1;
+        transition: opacity 450ms var(--ease-in-out);
+      }
+
+      .cycle-pill-track:not(.is-slid) .cycle-pill-row + .cycle-pill-row {
+        opacity: 0;
+      }
+
+      .cycle-pill-track.is-slid .cycle-pill-row:first-child {
+        opacity: 0;
+      }
+
+      .cycle-pill-text {
+        line-height: 1;
+      }
+
+      .cycle-pill-icon {
+        width: 1.82em;
+        height: 1.82em;
+        flex: none;
+        display: block;
+        overflow: visible;
+        transform: rotate(var(--sticker-rest, 0deg));
+        transform-origin: center;
+      }
+
       @media (prefers-reduced-motion: reduce) {
         .frame,
         .frame::after {
