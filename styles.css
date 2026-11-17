@@ -1267,4 +1267,12 @@
           animation: none;
         }
 
+        .cycle-pill,
+        .cycle-pill-track,
+        .cycle-pill-row,
+        .cycle-pill-icon,
+        .cycle-pill-icon.is-pop {
+          transition: none;
+          animation: none;
+        }
       }
