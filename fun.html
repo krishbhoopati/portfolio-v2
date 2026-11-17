@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fun</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="shell">
+      <aside class="sidebar">
+        <p class="intro">Krish is a builder who loves bringing ideas to life through design, technology, and a little bit of everything in between.</p>
+        <div class="status">
+          <div>
+            <p class="status-label">Currently</p>
+            <p class="status-detail">Building products and making complex things simpler @Sun Life</p>
+            <p class="status-detail">Product Design @Dancifier Labs (contract)</p>
+          </div>
+          <div>
+            <p class="status-label">Up Next:</p>
+            <p class="status-detail">Bringing ideas to life @TD</p>
+          </div>
+          <div>
+            <p class="status-label">Previously</p>
+            <p class="status-detail">Digital Innovation @Maple Leaf Foods</p>
+          </div>
+        </div>
+        <nav class="nav" aria-label="Primary">
+          <div class="nav-group">
+            <a href="about.html">About</a>
+            <a href="/">Work</a>
+            <a href="hackathons.html">Hackathons</a>
+            <a href="fun.html" aria-current="page">Fun<span class="mark" aria-hidden="true"></span></a>
+            <a href="writing.html">Writing</a>
+          </div>
+          <div class="nav-group">
+            <p class="nav-label">Links</p>
+            <a href="https://www.linkedin.com/in/jerry-di-3280181aa/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href="https://github.com/Jerrydiii" target="_blank" rel="noopener noreferrer">Github</a>
+            <a href="https://x.com/JerryDizs" target="_blank" rel="noopener noreferrer">Twitter</a>
+            <a href="https://devpost.com/krish-bhoopati556" target="_blank" rel="noopener noreferrer">Devpost</a>
+            <a href="mailto:fromjerrydi@gmail.com">Email</a>
+          </div>
+        </nav>
+      </aside>
+
+      <header class="mobile-header">
+        <div class="mobile-copy">
+          <p class="intro">Krish is a builder who loves bringing ideas to life through design, technology, and a little bit of everything in between.</p>
+          <div class="status">
+            <div>
+              <p class="status-label">Currently</p>
+              <p class="status-detail">Building products and making complex things simpler @Sun Life</p>
+              <p class="status-detail">Product Design @Dancifier Labs (contract)</p>
+            </div>
+            <div>
+              <p class="status-label">Up Next:</p>
+              <p class="status-detail">Bringing ideas to life @TD</p>
+            </div>
+            <div>
+              <p class="status-label">Previously</p>
+              <p class="status-detail">Digital Innovation @Maple Leaf Foods</p>
+            </div>
+          </div>
+        </div>
+        <button class="menu-button" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
+          <span></span>
+        </button>
+      </header>
+      <div class="mobile-nav" id="mobile-nav">
+        <nav class="nav" aria-label="Mobile">
+          <div class="nav-group">
+            <a href="about.html">About</a>
+            <a href="/">Work</a>
+            <a href="hackathons.html">Hackathons</a>
+            <a href="fun.html" aria-current="page">Fun<span class="mark" aria-hidden="true"></span></a>
+            <a href="writing.html">Writing</a>
+          </div>
+          <div class="nav-group">
+            <p class="nav-label">Links</p>
+            <a href="https://www.linkedin.com/in/jerry-di-3280181aa/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href="https://github.com/Jerrydiii" target="_blank" rel="noopener noreferrer">Github</a>
+            <a href="https://x.com/JerryDizs" target="_blank" rel="noopener noreferrer">Twitter</a>
+            <a href="https://devpost.com/krish-bhoopati556" target="_blank" rel="noopener noreferrer">Devpost</a>
+            <a href="mailto:fromjerrydi@gmail.com">Email</a>
+          </div>
+        </nav>
+      </div>
+
+      <div class="stage">
+        <main class="page"></main>
+      </div>
+    </div>
+    <script>
+      const menuButton = document.querySelector(".menu-button");
+      const mobileNav = document.querySelector("#mobile-nav");
+      menuButton.addEventListener("click", () => {
+        const open = menuButton.getAttribute("aria-expanded") === "true";
+        menuButton.setAttribute("aria-expanded", String(!open));
+        menuButton.setAttribute("aria-label", open ? "Open menu" : "Close menu");
+        mobileNav.classList.toggle("is-open", !open);
+      });
+    </script>
+  </body>
+</html>
