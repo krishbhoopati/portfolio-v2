@@ -861,6 +861,83 @@
         color: #ffffff;
       }
 
+      .case-hero.case-hero-screen h1.sunlife-headline {
+        position: absolute;
+        z-index: 1;
+        inset: 0;
+        top: 0;
+        left: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-width: none;
+        margin: 0;
+        padding: 48px var(--page);
+        color: #ffffff;
+        font-family: Geist, "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: clamp(18px, 3.2vw, 40px);
+        font-weight: 500;
+        line-height: 2.1;
+        letter-spacing: -0.03em;
+        text-align: center;
+        pointer-events: auto;
+      }
+
+      .sunlife-sr {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        padding: 0;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+
+      .sunlife-sentence {
+        position: relative;
+        z-index: 1;
+        display: block;
+        max-width: min(34em, 100%);
+        text-align: center;
+        text-wrap: balance;
+      }
+
+      .sunlife-clause {
+        display: block;
+        white-space: nowrap;
+        text-align: center;
+      }
+
+      .sunlife-pill-wrap {
+        display: inline-block;
+        vertical-align: middle;
+        white-space: nowrap;
+      }
+
+      .frame .sunlife-headline-card {
+        position: absolute;
+        z-index: 1;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0;
+        padding: 22px 18px;
+        color: #ffffff;
+        font-family: Geist, "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: clamp(14px, 1.45vw, 20px);
+        font-weight: 500;
+        line-height: 2.1;
+        letter-spacing: -0.03em;
+        text-align: center;
+      }
+
+      .frame .sunlife-headline-card .sunlife-sentence {
+        max-width: min(34em, 100%);
+      }
+
       @media (prefers-reduced-motion: reduce) {
         .frame,
         .frame::after {
