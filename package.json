@@ -1,0 +1,20 @@
+{
+  "name": "portfolio-v2",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build:shader": "esbuild shader/sunlife.jsx --bundle --minify --format=esm --outfile=shader.js --jsx=automatic"
+  },
+  "dependencies": {
+    "@react-three/fiber": "^8.17.10",
+    "@shadergradient/react": "^2.4.20",
+    "camera-controls": "2.9.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "three": "^0.169.0",
+    "three-stdlib": "^2.35.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.0"
+  }
+}

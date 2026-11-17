@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Geist:wght@400&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500&family=Newsreader:opsz,wght@16..72,500&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
@@ -99,7 +99,10 @@
             <section class="catalog" aria-label="Projects">
               <div class="column">
                 <a class="card" href="#sun-life" aria-label="Sun Life, Strategy, 2026, Toronto">
-                  <div class="frame medium"></div>
+                  <div class="frame medium frame-sunlife">
+                    <div class="shader-mount" id="sunlife-shader"></div>
+                    <p class="frame-word">Sun Life</p>
+                  </div>
                   <div class="caption">
                     <span>Sun Life</span>
                     <span>Strategy, 2026, Toronto</span>
@@ -148,6 +151,7 @@
         </div>
       </div>
     </div>
+    <script type="module" src="shader.js?v=4"></script>
     <script>
       const menuButton = document.querySelector(".menu-button");
       const mobileNav = document.querySelector("#mobile-nav");

@@ -292,6 +292,39 @@
         opacity: 1;
       }
 
+      .frame-sunlife {
+        background: #ffb020;
+      }
+
+      .shader-mount {
+        position: absolute;
+        inset: 0;
+      }
+
+      .shader-mount canvas {
+        display: block;
+        width: 100% !important;
+        height: 100% !important;
+      }
+
+      .frame-word {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0;
+        color: #ffffff;
+        font-family: Newsreader, "Iowan Old Style", Palatino, Georgia, serif;
+        font-size: 42px;
+        font-weight: 500;
+        font-optical-sizing: auto;
+        line-height: 1;
+        letter-spacing: -0.03em;
+        pointer-events: none;
+      }
+
       .frame::after {
         content: "";
         position: absolute;
