@@ -1,5 +1,6 @@
 import { createRoot } from "react-dom/client";
 import { ShaderGradient, ShaderGradientCanvas } from "@shadergradient/react";
+import { CyclingHeadline } from "./CyclingHeadline.jsx";
 
 const mount = document.querySelector("#sunlife-shader");
 
