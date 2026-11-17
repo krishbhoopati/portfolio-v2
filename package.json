@@ -3,7 +3,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build:shader": "esbuild shader/sunlife.jsx --bundle --minify --format=esm --outfile=shader.js --jsx=automatic"
+    "build:shader": "esbuild shader/sunlife.jsx --bundle --minify --format=esm --outfile=shader.js --jsx=automatic",
+    "build:maple": "esbuild shader/maple-ascii.jsx --bundle --minify --format=esm --outfile=maple-ascii.js --jsx=automatic"
   },
   "dependencies": {
     "@react-three/fiber": "^8.17.10",
