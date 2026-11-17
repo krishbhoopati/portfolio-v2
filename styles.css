@@ -1219,6 +1219,38 @@
         color: #928d8d;
       }
 
+      @media (min-width: 1024px) {
+        .case-hero.case-hero-screen {
+          height: calc(100dvh - 7.5rem);
+          padding: 88px 64px 0;
+        }
+
+        .case-hero h1 {
+          top: 160px;
+        }
+
+        .case-body {
+          padding-top: 72px;
+          padding-bottom: 120px;
+        }
+
+        .case-grid {
+          grid-template-columns: 120px minmax(24px, 1fr) min(100%, 864px) minmax(24px, 1fr);
+          gap: 0;
+        }
+
+        .case-toc {
+          position: sticky;
+          top: 32px;
+          grid-column: 1;
+          align-self: start;
+        }
+
+        .case-main {
+          grid-column: 3;
+        }
+      }
+
       @media (prefers-reduced-motion: reduce) {
         .frame,
         .frame::after {
