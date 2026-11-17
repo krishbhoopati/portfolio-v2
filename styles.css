@@ -585,6 +585,14 @@
         height: 100%;
       }
 
+      .case-hero.case-hero-screen h1 {
+        position: relative;
+        top: auto;
+        left: auto;
+        flex: none;
+        margin-bottom: 28px;
+      }
+
       @media (prefers-reduced-motion: reduce) {
         .frame,
         .frame::after {
