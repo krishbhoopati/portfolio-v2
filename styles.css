@@ -1260,4 +1260,11 @@
         .card:hover .frame {
           transform: none;
         }
+
+        .copilot-typing span,
+        .copilot-composer-text.is-typing::after,
+        .copilot-stream.is-typing::after {
+          animation: none;
+        }
+
       }
