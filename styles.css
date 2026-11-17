@@ -843,6 +843,24 @@
         }
       }
 
+      .case-hero h1 {
+        position: absolute;
+        z-index: 1;
+        top: 96px;
+        left: var(--page);
+        max-width: 361px;
+        margin: 0;
+        color: #242424;
+        font-size: 32px;
+        font-weight: 500;
+        line-height: 1.21;
+        letter-spacing: -0.022em;
+      }
+
+      .case-hero-shade h1 {
+        color: #ffffff;
+      }
+
       @media (prefers-reduced-motion: reduce) {
         .frame,
         .frame::after {
