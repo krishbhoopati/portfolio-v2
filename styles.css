@@ -593,6 +593,97 @@
         margin-bottom: 28px;
       }
 
+      .copilot {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        min-height: 0;
+        flex: 1;
+        overflow: hidden;
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        border-bottom: 0;
+        border-radius: 16px 16px 0 0;
+        background: #ffffff;
+        box-shadow: 0 18px 50px rgba(0, 0, 0, 0.08);
+        color: #242424;
+        font-family: "Segoe UI", "Segoe UI Variable", system-ui, sans-serif;
+        font-size: 14px;
+        line-height: 1.45;
+        letter-spacing: 0;
+      }
+
+      .copilot-rail {
+        display: none;
+        width: 220px;
+        flex: none;
+        flex-direction: column;
+        padding: 18px 12px 16px;
+        border-right: 1px solid #efefef;
+        background: #fafafa;
+      }
+
+      .copilot-brand,
+      .copilot-top {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: 600;
+      }
+
+      .copilot-brand {
+        padding: 0 8px 14px;
+      }
+
+      .copilot-mark {
+        width: 16px;
+        height: 16px;
+        flex: none;
+        background: linear-gradient(135deg, #3cc6ff 0%, #5a6bff 46%, #c86bff 100%);
+        clip-path: polygon(50% 0%, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0% 50%, 38% 38%);
+      }
+
+      .copilot-nav {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      .copilot-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 10px;
+        border-radius: 8px;
+        color: #242424;
+      }
+
+      .copilot-item svg {
+        flex: none;
+        color: #424242;
+      }
+
+      .copilot-chats {
+        margin: 22px 10px 0;
+        color: #616161;
+        font-size: 12px;
+        font-weight: 600;
+      }
+
+      .copilot-main {
+        display: flex;
+        min-width: 0;
+        flex: 1;
+        flex-direction: column;
+        background: #ffffff;
+      }
+
+      .copilot-top {
+        height: 52px;
+        flex: none;
+        padding: 0 20px;
+        border-bottom: 1px solid #f0f0f0;
+      }
+
       @media (prefers-reduced-motion: reduce) {
         .frame,
         .frame::after {
