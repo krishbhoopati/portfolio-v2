@@ -49,3 +49,9 @@ if (mount) {
     </ShaderGradientCanvas>
   );
 }
+
+const headline = document.querySelector("#sunlife-headline");
+
+if (headline) {
+  createRoot(headline).render(<CyclingHeadline />);
+}
