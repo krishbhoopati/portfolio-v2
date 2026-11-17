@@ -543,6 +543,34 @@
         }
       }
 
+      .case {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        min-width: 0;
+      }
+
+      .case-hero {
+        position: relative;
+        height: min(70vh, 720px);
+        min-height: 420px;
+        overflow: hidden;
+        background: var(--placeholder);
+      }
+
+      .case-hero.case-hero-screen {
+        display: flex;
+        height: calc(100dvh - 14rem);
+        min-height: 0;
+        flex-direction: column;
+        padding: 72px var(--page) 0;
+        background: #05060c;
+      }
+
+      .case-hero.case-hero-screen .shader-mount {
+        z-index: 0;
+      }
+
       @media (prefers-reduced-motion: reduce) {
         .frame,
         .frame::after {
