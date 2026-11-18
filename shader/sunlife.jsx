@@ -14,11 +14,12 @@ if (mount) {
       pixelDensity={pixelDensity}
       fov={45}
       pointerEvents="none"
-      lazyLoad
+      lazyLoad={false}
     >
       <ShaderGradient
         type="waterPlane"
         animate={reduceMotion ? "off" : "on"}
+        enableTransition={false}
         brightness={1.2}
         cAzimuthAngle={180}
         cDistance={2.4}
