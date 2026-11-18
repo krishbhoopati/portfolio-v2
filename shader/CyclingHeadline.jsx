@@ -326,30 +326,13 @@ function usePrefersReducedMotion() {
   return reduce;
 }
 
-function useFinePointer() {
-  const [fine, setFine] = useState(false);
-
-  useEffect(() => {
-    const mq = window.matchMedia("(hover: hover) and (pointer: fine)");
-    const sync = () => setFine(mq.matches);
-    sync();
-    mq.addEventListener("change", sync);
-    return () => mq.removeEventListener("change", sync);
-  }, []);
-
-  return fine;
-}
-
 export function CyclingHeadline({ copy = sunLifeHeadline }) {
   const reduce = usePrefersReducedMotion();
-  const finePointer = useFinePointer();
   const [indices, setIndices] = useState(() => copy.clauses.map(() => 0));
-  const [hovered, setHovered] = useState(false);
-  const paused = finePointer && hovered;
   const turn = useRef(0);
 
   useEffect(() => {
-    if (reduce || paused) return undefined;
+    if (reduce) return undefined;
     const timer = setInterval(() => {
       const slot = turn.current % copy.clauses.length;
       turn.current = slot + 1;
@@ -360,17 +343,12 @@ export function CyclingHeadline({ copy = sunLifeHeadline }) {
       });
     }, copy.step);
     return () => clearInterval(timer);
-  }, [reduce, paused, copy.step, copy.clauses.length, copy.states.length]);
+  }, [reduce, copy.step, copy.clauses.length, copy.states.length]);
 
   return (
     <>
       <span className="sunlife-sr">{stableSentence(copy)}</span>
-      <span
-        className="sunlife-sentence"
-        aria-hidden="true"
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
-      >
+      <span className="sunlife-sentence" aria-hidden="true">
         {copy.clauses.reduce((nodes, clause, clauseIndex) => {
           if (clauseIndex > 0) nodes.push(" ");
           nodes.push(
