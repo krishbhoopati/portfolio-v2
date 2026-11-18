@@ -159,6 +159,9 @@ function PillText({ item }) {
   return <span className="cycle-pill-text">{item.text}</span>;
 }
 
+const STICKER_MS = 700;
+const STICKER_PEAK_MS = 500;
+
 function readWidth(node) {
   return Math.ceil(node.getBoundingClientRect().width) + 1;
 }
@@ -171,6 +174,9 @@ function Pill({ item, reduce }) {
   const measureRef = useRef(null);
   const shown = useRef(item);
   const [width, setWidth] = useState(null);
+  const [duration, setDuration] = useState(null);
+  const [easing, setEasing] = useState(null);
+  const naturalWidth = useRef(0);
   const [pop, setPop] = useState(false);
   const sized = useRef(false);
   const seen = useRef(false);
@@ -191,19 +197,17 @@ function Pill({ item, reduce }) {
   }, [item, reduce]);
 
   useLayoutEffect(() => {
-    if (!outgoing || slide) return undefined;
-    let inner = 0;
-    const outer = requestAnimationFrame(() => {
-      inner = requestAnimationFrame(() => {
-        const el = measureRef.current;
-        if (el) setWidth(readWidth(el));
-        setSlide(true);
-      });
-    });
-    return () => {
-      cancelAnimationFrame(outer);
-      cancelAnimationFrame(inner);
-    };
+    if (!outgoing || slide) return;
+    const el = measureRef.current;
+    if (el) {
+      const next = readWidth(el);
+      const fontSize = parseFloat(getComputedStyle(el).fontSize) || 16;
+      naturalWidth.current = next;
+      setDuration("500ms");
+      setEasing("cubic-bezier(0.22, 1, 0.36, 1)");
+      setWidth(next + Math.round(fontSize * 0.3));
+    }
+    setSlide(true);
   }, [outgoing, slide]);
 
   useLayoutEffect(() => {
@@ -232,8 +236,16 @@ function Pill({ item, reduce }) {
       return undefined;
     }
     setPop(true);
-    const timer = setTimeout(() => setPop(false), 700);
-    return () => clearTimeout(timer);
+    const popTimer = setTimeout(() => setPop(false), STICKER_MS);
+    const settleTimer = setTimeout(() => {
+      setDuration("200ms");
+      setEasing("cubic-bezier(0.55, 0, 0.85, 0.25)");
+      if (naturalWidth.current) setWidth(naturalWidth.current);
+    }, STICKER_PEAK_MS);
+    return () => {
+      clearTimeout(popTimer);
+      clearTimeout(settleTimer);
+    };
   }, [item.text, item.icon, reduce]);
 
   useEffect(() => {
@@ -254,7 +266,6 @@ function Pill({ item, reduce }) {
 
   const trackClass = [
     "cycle-pill-track",
-    slide ? "is-slid" : "",
     instant ? "is-instant" : "",
   ]
     .filter(Boolean)
@@ -269,7 +280,18 @@ function Pill({ item, reduce }) {
     .join(" ");
 
   return (
-    <span className="cycle-pill" style={width == null ? undefined : { width }}>
+    <span
+      className="cycle-pill"
+      style={
+        width == null
+          ? undefined
+          : {
+              width,
+              transitionDuration: duration || undefined,
+              transitionTimingFunction: easing || undefined,
+            }
+      }
+    >
       <span className="cycle-pill-measure" ref={measureRef}>
         <PillText item={current} />
       </span>
@@ -279,11 +301,6 @@ function Pill({ item, reduce }) {
       </span>
       <span className="cycle-pill-viewport">
         <span className={trackClass}>
-          {outgoing ? (
-            <span className="cycle-pill-row">
-              <PillText item={outgoing} />
-            </span>
-          ) : null}
           <span className="cycle-pill-row">
             <PillText item={current} />
           </span>
