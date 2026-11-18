@@ -313,7 +313,7 @@
 
       .frame-maple .copilot {
         flex: none;
-        height: 68%;
+        height: 74%;
         margin-top: auto;
         font-size: 11px;
         border-radius: 12px 12px 0 0;
@@ -877,7 +877,7 @@
         font-family: Geist, "Helvetica Neue", Helvetica, Arial, sans-serif;
         font-size: clamp(18px, 3.2vw, 40px);
         font-weight: 500;
-        line-height: 2.1;
+        line-height: 1.9;
         letter-spacing: -0.03em;
         text-align: center;
         pointer-events: auto;
@@ -929,7 +929,7 @@
         font-family: Geist, "Helvetica Neue", Helvetica, Arial, sans-serif;
         font-size: clamp(14px, 1.45vw, 20px);
         font-weight: 500;
-        line-height: 2.1;
+        line-height: 1.9;
         letter-spacing: -0.03em;
         text-align: center;
       }
@@ -951,7 +951,7 @@
         color: #ffffff;
         line-height: 1;
         white-space: nowrap;
-        transition: width 450ms var(--ease-in-out);
+        transition: width 450ms var(--ease);
       }
 
       .cycle-pill-measure,
