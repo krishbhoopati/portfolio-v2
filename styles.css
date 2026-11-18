@@ -262,6 +262,22 @@
         order: 4;
       }
 
+      .card:nth-child(4) {
+        order: 6;
+      }
+
+      .card:nth-child(5) {
+        order: 8;
+      }
+
+      .card:nth-child(6) {
+        order: 10;
+      }
+
+      .card:nth-child(7) {
+        order: 12;
+      }
+
       .column:last-child .card:nth-child(1) {
         order: 1;
       }
@@ -272,6 +288,18 @@
 
       .column:last-child .card:nth-child(3) {
         order: 5;
+      }
+
+      .column:last-child .card:nth-child(4) {
+        order: 7;
+      }
+
+      .column:last-child .card:nth-child(5) {
+        order: 9;
+      }
+
+      .column:last-child .card:nth-child(6) {
+        order: 11;
       }
 
       .frame {
