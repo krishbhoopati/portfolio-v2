@@ -23,7 +23,7 @@ export const sunLifeHeadline = {
     [
       { text: "disconnected workflows", icon: "branches" },
       { text: "simpler processes", icon: "path" },
-      { text: "work smarter", icon: "spark" },
+      { text: "smarter choices", icon: "spark" },
     ],
     [
       { text: "scattered information", icon: "layers" },
