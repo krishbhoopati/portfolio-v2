@@ -452,10 +452,12 @@
       }
 
       .caption span:first-child {
+        min-width: 0;
         color: var(--text);
       }
 
       .caption span:last-child {
+        flex-shrink: 0;
         color: var(--muted);
         text-align: right;
       }
