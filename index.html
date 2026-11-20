@@ -309,6 +309,7 @@
         menuButton.setAttribute("aria-label", open ? "Open menu" : "Close menu");
         mobileNav.classList.toggle("is-open", !open);
       });
+
       const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       const playVideo = (video) => {
         video.muted = true;
