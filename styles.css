@@ -457,6 +457,13 @@
         background: var(--placeholder);
       }
 
+      .card-video::-webkit-media-controls,
+      .card-video::-webkit-media-controls-start-playback-button,
+      .card-video::-webkit-media-controls-overlay-play-button {
+        display: none !important;
+        -webkit-appearance: none;
+      }
+
       .shader-mount {
         position: absolute;
         inset: 0;
