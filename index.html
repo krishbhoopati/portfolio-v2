@@ -297,6 +297,37 @@
         menuButton.setAttribute("aria-label", open ? "Open menu" : "Close menu");
         mobileNav.classList.toggle("is-open", !open);
       });
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const playVideo = (video) => {
+        video.muted = true;
+        video.defaultMuted = true;
+        video.playsInline = true;
+        video.setAttribute("playsinline", "");
+        video.setAttribute("webkit-playsinline", "");
+        const attempt = () => {
+          const pending = video.play();
+          if (pending) pending.catch(() => {});
+        };
+        if (video.readyState >= 2) attempt();
+        else video.addEventListener("canplay", attempt, { once: true });
+      };
+
+      const videoObserver = new IntersectionObserver((entries) => {
+        for (const entry of entries) {
+          const video = entry.target;
+          if (entry.isIntersecting) {
+            if (!video.getAttribute("src") && video.dataset.src) {
+              video.preload = "auto";
+              video.src = video.dataset.src;
+            }
+            if (!reduceMotion) playVideo(video);
+          } else if (!video.paused) {
+            video.pause();
+          }
+        }
+      }, { rootMargin: "400px 0px" });
+
+      document.querySelectorAll(".card-video").forEach((video) => videoObserver.observe(video));
     </script>
   </body>
 </html>
