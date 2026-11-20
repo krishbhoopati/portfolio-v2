@@ -598,8 +598,13 @@
           flex-direction: row;
         }
 
+        .work,
+        .about {
+          padding: var(--pad) 0 96px;
+        }
+
         .work {
-          padding: var(--pad) 0;
+          padding-bottom: var(--pad);
         }
 
         .catalog,
