@@ -242,6 +242,26 @@
         letter-spacing: -0.02em;
       }
 
+      .about p + p,
+      .about p + ul,
+      .about ul + p {
+        margin-top: 16px;
+      }
+
+      .about ul {
+        margin: 0;
+        padding-left: 1.2em;
+        list-style: disc;
+      }
+
+      .about li {
+        padding-left: 0.35em;
+      }
+
+      .about li + li {
+        margin-top: 4px;
+      }
+
       .catalog {
         display: grid;
         grid-template-columns: 1fr;
