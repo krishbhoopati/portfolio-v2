@@ -228,6 +228,20 @@
         padding: 0 var(--page) var(--page);
       }
 
+      .about {
+        max-width: 34rem;
+        padding: 0 var(--page) 96px;
+      }
+
+      .about p,
+      .about li {
+        margin: 0;
+        font-size: 12px;
+        line-height: 16.5px;
+        font-weight: 400;
+        letter-spacing: -0.02em;
+      }
+
       .catalog {
         display: grid;
         grid-template-columns: 1fr;
