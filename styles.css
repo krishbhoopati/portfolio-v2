@@ -454,7 +454,7 @@
         height: 100%;
         object-fit: contain;
         pointer-events: none;
-        background: #111;
+        background: var(--placeholder);
       }
 
       .shader-mount {
