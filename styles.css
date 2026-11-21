@@ -445,10 +445,7 @@
       }
 
       .about .contributions-status {
-        display: grid;
-        min-height: 116px;
-        margin: 0;
-        place-items: center;
+        margin: 0 0 10px;
         color: var(--muted);
         font-size: 13px;
         line-height: 18px;
@@ -587,6 +584,40 @@
         width: 20px;
         height: 20px;
         background-image: url("media/plant-4.png");
+      }
+
+      .contributions.is-planting .contributions-cell[data-falling]::before {
+        opacity: 0;
+      }
+
+      .contributions-flyer {
+        position: fixed;
+        z-index: 40;
+        display: block;
+        background: center / contain no-repeat;
+        transform-origin: center bottom;
+        pointer-events: none;
+      }
+
+      .contributions-flyer[data-level="1"] { background-image: url("media/plant-1.png"); }
+      .contributions-flyer[data-level="2"] { background-image: url("media/plant-2.png"); }
+      .contributions-flyer[data-level="3"] { background-image: url("media/plant-3.png"); }
+      .contributions-flyer[data-level="4"] { background-image: url("media/plant-4.png"); }
+
+      @media (prefers-reduced-motion: reduce) {
+        .contributions.is-planting .contributions-cell[data-falling]::before {
+          opacity: 1;
+          animation: contributions-tree-fade 180ms var(--ease) both;
+        }
+
+        .contributions-flyer {
+          display: none;
+        }
+      }
+
+      @keyframes contributions-tree-fade {
+        from { opacity: 0; }
+        to { opacity: 1; }
       }
 
       .contributions-cell:hover {

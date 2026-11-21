@@ -104,8 +104,8 @@
               <a href="https://github.com/krishbhoopati" target="_blank" rel="noopener noreferrer">Contributions in the last year</a>
             </p>
             <div class="contributions-card">
-              <p class="contributions-status">Loading contributions…</p>
-              <div class="contributions-chart" data-chart hidden>
+              <p class="contributions-status" hidden></p>
+              <div class="contributions-chart" data-chart>
                 <div class="contributions-days" aria-hidden="true">
                   <span></span>
                   <span>Mon</span>
@@ -120,7 +120,7 @@
                   <div class="contributions-grid" data-grid></div>
                 </div>
               </div>
-              <div class="contributions-foot" data-foot hidden>
+              <div class="contributions-foot" data-foot>
                 <div class="contributions-legend" aria-hidden="true">
                   <span>Less</span>
                   <span class="contributions-swatch" data-level="0"></span>
@@ -300,8 +300,120 @@
         const tip = document.querySelector(".contributions-tip");
         const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
         let activeCell = null;
+        let painted = false;
         let signature = "";
         let refreshing = false;
+        let aligned = false;
+        const dayByIso = new Map();
+        let planting = null;
+        const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const treeSizes = [0, 18, 16, 18, 20];
+
+        const clearPlanting = () => {
+          if (!planting) return;
+          const current = planting;
+          planting = null;
+          current.abort();
+          current.flyers.forEach((flyer) => flyer.remove());
+          contributionsRoot.classList.remove("is-planting");
+          grid.querySelectorAll("[data-falling]").forEach((cell) => delete cell.dataset.falling);
+        };
+
+        const plantTrees = () => {
+          if (reduceMotion) {
+            contributionsRoot.classList.add("is-planting");
+            const timer = window.setTimeout(() => {
+              contributionsRoot.classList.remove("is-planting");
+              grid.querySelectorAll("[data-falling]").forEach((cell) => delete cell.dataset.falling);
+            }, 220);
+            planting = {
+              abort: () => window.clearTimeout(timer),
+              flyers: [],
+            };
+            return;
+          }
+
+          const port = scroll.getBoundingClientRect();
+          const easing = getComputedStyle(document.documentElement).getPropertyValue("--ease").trim();
+          const motion = new AbortController();
+          const flyers = [];
+          const tracked = [];
+          const falling = [];
+
+          grid.querySelectorAll(".contributions-cell").forEach((cell) => {
+            const level = Number(cell.dataset.level);
+            if (!level) {
+              delete cell.dataset.falling;
+              return;
+            }
+            const rect = cell.getBoundingClientRect();
+            const inView = rect.right > port.left + 1 && rect.left < port.right - 1 && rect.bottom > port.top && rect.top < port.bottom;
+            if (!inView) {
+              delete cell.dataset.falling;
+              return;
+            }
+            falling.push(cell);
+          });
+
+          falling.sort((a, b) => Number(a.dataset.col) - Number(b.dataset.col) || Number(a.dataset.row) - Number(b.dataset.row));
+
+          falling.forEach((cell, index) => {
+            const level = Number(cell.dataset.level);
+            const size = treeSizes[level];
+            const flyer = document.createElement("span");
+            flyer.className = "contributions-flyer";
+            flyer.dataset.level = String(level);
+            flyer.setAttribute("aria-hidden", "true");
+            flyer.style.width = `${size}px`;
+            flyer.style.height = `${size}px`;
+            const place = () => {
+              const next = cell.getBoundingClientRect();
+              flyer.style.left = `${next.left + next.width / 2 - size / 2}px`;
+              flyer.style.top = `${next.bottom - size}px`;
+            };
+            place();
+            document.body.appendChild(flyer);
+
+            const animation = flyer.animate(
+              [
+                { opacity: 0, transform: "scale(5.5)" },
+                { opacity: 1, transform: "scale(3.4)", offset: 0.22 },
+                { opacity: 1, transform: "scale(1)" },
+              ],
+              { duration: 340, delay: index * 36, easing, fill: "both" },
+            );
+            const land = () => {
+              if (!flyer.isConnected) return;
+              flyer.remove();
+              delete cell.dataset.falling;
+              const index = flyers.indexOf(flyer);
+              if (index !== -1) flyers.splice(index, 1);
+              if (flyers.length === 0) {
+                motion.abort();
+                contributionsRoot.classList.remove("is-planting");
+                if (planting && planting.flyers === flyers) planting = null;
+              }
+            };
+            animation.onfinish = land;
+            animation.oncancel = land;
+            flyers.push(flyer);
+            tracked.push(place);
+          });
+
+          if (flyers.length === 0) {
+            contributionsRoot.classList.remove("is-planting");
+            return;
+          }
+
+          const follow = () => tracked.forEach((place) => place());
+          scroll.addEventListener("scroll", follow, { passive: true, signal: motion.signal });
+          window.addEventListener("scroll", follow, { passive: true, signal: motion.signal });
+          window.addEventListener("resize", follow, { signal: motion.signal });
+          planting = {
+            abort: () => motion.abort(),
+            flyers,
+          };
+        };
 
         const parseDate = (iso) => {
           const [year, month, day] = iso.split("-").map(Number);
@@ -348,6 +460,35 @@
           tip.style.setProperty("--arrow", `${center - clamped}px`);
         };
 
+        const plantLevel = (count) => {
+          if (count >= 15) return 4;
+          if (count >= 10) return 3;
+          if (count >= 5) return 2;
+          if (count >= 1) return 1;
+          return 0;
+        };
+
+        const isoFromDate = (date) => {
+          const month = String(date.getMonth() + 1).padStart(2, "0");
+          const day = String(date.getDate()).padStart(2, "0");
+          return `${date.getFullYear()}-${month}-${day}`;
+        };
+
+        const emptyYear = () => {
+          const end = new Date();
+          end.setHours(0, 0, 0, 0);
+          const start = new Date(end);
+          start.setFullYear(start.getFullYear() - 1);
+          start.setDate(start.getDate() + 1);
+          start.setDate(start.getDate() - start.getDay());
+          const days = [];
+          for (let cursor = new Date(start); cursor <= end; cursor.setDate(cursor.getDate() + 1)) {
+            const date = new Date(cursor);
+            days.push({ date, iso: isoFromDate(date), count: 0 });
+          }
+          return days;
+        };
+
         const showTip = (cell, day) => {
           const when = `${day.date.toLocaleDateString("en-US", { month: "long" })} ${ordinal(day.date.getDate())}, ${day.date.getFullYear()}`;
           const strong = document.createElement("strong");
@@ -365,29 +506,71 @@
           placeTip(cell);
         };
 
-        const render = (data) => {
-          const plantLevel = (count) => {
-            if (count >= 15) return 4;
-            if (count >= 10) return 3;
-            if (count >= 5) return 2;
-            if (count >= 1) return 1;
-            return 0;
+        const beginPlanting = () => {
+          if (painted) return;
+          painted = true;
+          contributionsRoot.classList.add("is-planting");
+          const begin = () => {
+            requestAnimationFrame(plantTrees);
           };
+          const rect = chart.getBoundingClientRect();
+          const seen = rect.height > 0 && rect.bottom > 64 && rect.top < window.innerHeight - 48;
+          if (seen) {
+            requestAnimationFrame(begin);
+          } else {
+            const observer = new IntersectionObserver((entries) => {
+              if (!entries.some((entry) => entry.isIntersecting)) return;
+              observer.disconnect();
+              begin();
+            }, { threshold: 0.4 });
+            observer.observe(chart);
+          }
+        };
 
+        const render = (data, { animate = true } = {}) => {
           const days = data.contributions.map((entry) => ({
             date: parseDate(entry.date),
+            iso: entry.date,
             count: entry.count,
           }));
           const total = data.total?.lastYear ?? days.reduce((sum, day) => sum + day.count, 0);
-          const nextSignature = `${total}:${days.map((day) => `${day.date.getTime()}:${day.count}`).join(",")}`;
-          if (nextSignature === signature) return;
-          signature = nextSignature;
+          const nextSignature = `${total}:${days.map((day) => `${day.iso}:${day.count}`).join(",")}`;
+          if (animate) {
+            if (painted && nextSignature === signature) return;
+            if (planting) return;
+            signature = nextSignature;
+          }
+          days.forEach((day) => dayByIso.set(day.iso, day));
+          const openDate = activeCell?.dataset.date || "";
+          const existing = [...grid.querySelectorAll(".contributions-cell")];
+          const sameGrid = existing.length === days.length && days.every((day, index) => existing[index].dataset.date === day.iso);
+
+          if (animate) {
+            totalLink.replaceChildren();
+            const count = document.createElement("span");
+            count.textContent = total.toLocaleString("en-US");
+            totalLink.append(count, " contributions in the last year");
+          }
+
+          if (sameGrid) {
+            days.forEach((day, index) => {
+              const level = plantLevel(day.count);
+              existing[index].dataset.level = String(level);
+              if (animate && !painted && level > 0) existing[index].dataset.falling = "true";
+            });
+            status.hidden = true;
+            if (animate) beginPlanting();
+            if (openDate) {
+              const reopen = grid.querySelector(`[data-date="${openDate}"]`);
+              const reopenDay = dayByIso.get(openDate);
+              if (reopen && reopenDay) showTip(reopen, reopenDay);
+            }
+            return;
+          }
+
+          if (painted) clearPlanting();
           months.replaceChildren();
           grid.replaceChildren();
-          totalLink.replaceChildren();
-          const count = document.createElement("span");
-          count.textContent = total.toLocaleString("en-US");
-          totalLink.append(count, " contributions in the last year");
 
           const cells = [...Array(days[0].date.getDay()).fill(null), ...days];
           while (cells.length % 7 !== 0) cells.push(null);
@@ -419,7 +602,7 @@
             months.appendChild(node);
           });
 
-          cells.forEach((day) => {
+          cells.forEach((day, index) => {
             if (!day) {
               const pad = document.createElement("span");
               pad.className = "contributions-pad";
@@ -428,10 +611,15 @@
             }
             const cell = document.createElement("span");
             cell.className = "contributions-cell";
+            cell.dataset.date = day.iso;
+            cell.dataset.col = String(Math.floor(index / 7));
+            cell.dataset.row = String(index % 7);
             cell.dataset.level = String(plantLevel(day.count));
+            if (animate && !painted && cell.dataset.level !== "0") cell.dataset.falling = "true";
             cell.addEventListener("pointerenter", (event) => {
               if (event.pointerType === "touch") return;
-              showTip(cell, day);
+              const current = dayByIso.get(cell.dataset.date);
+              if (current) showTip(cell, current);
             });
             cell.addEventListener("pointerleave", (event) => {
               if (event.pointerType === "touch") return;
@@ -439,22 +627,29 @@
             });
             cell.addEventListener("pointerdown", (event) => {
               if (event.pointerType !== "touch") return;
+              const current = dayByIso.get(cell.dataset.date);
+              if (!current) return;
               if (activeCell === cell && !tip.hidden) hideTip();
-              else showTip(cell, day);
+              else showTip(cell, current);
             });
             grid.appendChild(cell);
           });
 
-          if (status.isConnected) status.remove();
+          status.hidden = true;
           chart.hidden = false;
           foot.hidden = false;
-          requestAnimationFrame(() => {
-            if (scroll.scrollWidth > scroll.clientWidth) scroll.scrollLeft = scroll.scrollWidth;
-          });
+          const reopen = openDate ? grid.querySelector(`[data-date="${openDate}"]`) : null;
+          const reopenDay = dayByIso.get(openDate);
+          if (reopen && reopenDay) showTip(reopen, reopenDay);
+          else hideTip();
+          aligned = true;
+          if (scroll.scrollWidth > scroll.clientWidth) scroll.scrollLeft = scroll.scrollWidth;
+          if (animate) beginPlanting();
         };
 
         const fail = () => {
           if (signature) return;
+          status.hidden = false;
           status.replaceChildren(document.createTextNode("Couldn’t load the contribution graph. "));
           const link = document.createElement("a");
           link.href = "https://github.com/krishbhoopati";
@@ -504,6 +699,9 @@
           }
         };
 
+        render({
+          contributions: emptyYear().map((day) => ({ date: day.iso, count: 0 })),
+        }, { animate: false });
         refresh();
         window.setInterval(() => {
           if (!document.hidden) refresh();
