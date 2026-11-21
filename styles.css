@@ -564,8 +564,8 @@
 
       .contributions-cell[data-level="1"]::before,
       .contributions-swatch[data-level="1"]::before {
-        width: 14px;
-        height: 14px;
+        width: 18px;
+        height: 18px;
         background-image: url("media/plant-1.png");
       }
 
