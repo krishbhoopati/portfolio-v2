@@ -57,6 +57,16 @@
         display: none;
       }
 
+      .is-about .intro,
+      .is-about .status,
+      .is-about .mobile-header {
+        display: none;
+      }
+
+      .is-about .mobile-nav {
+        display: block;
+      }
+
       .mobile-header {
         position: relative;
         z-index: 40;
