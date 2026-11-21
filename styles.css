@@ -606,6 +606,14 @@
           margin-top: 46px;
         }
 
+        .is-about .mobile-nav {
+          display: none;
+        }
+
+        .is-about .sidebar .nav {
+          margin-top: 0;
+        }
+
         .stage {
           padding-left: 38px;
           padding-right: var(--pad);
