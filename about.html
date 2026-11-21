@@ -10,7 +10,7 @@
       href="https://fonts.googleapis.com/css2?family=Geist:wght@400&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=about-stickers" />
+    <link rel="stylesheet" href="styles.css?v=about-drag" />
   </head>
   <body>
     <div class="shell is-about">
@@ -110,6 +110,111 @@
         menuButton.setAttribute("aria-expanded", String(!open));
         menuButton.setAttribute("aria-label", open ? "Open menu" : "Close menu");
         mobileNav.classList.toggle("is-open", !open);
+      });
+
+      document.querySelectorAll(".sticker, .logo").forEach((sticker) => {
+        sticker.draggable = false;
+        let drag = null;
+
+        const pin = (clientX, clientY, fixed) => {
+          const rect = sticker.getBoundingClientRect();
+          const width = sticker.offsetWidth;
+          const height = sticker.offsetHeight;
+          const left = rect.left + rect.width / 2 - width / 2;
+          const top = rect.top + rect.height / 2 - height / 2;
+          sticker.style.position = fixed ? "fixed" : "absolute";
+          sticker.style.left = `${fixed ? left : left + window.scrollX}px`;
+          sticker.style.top = `${fixed ? top : top + window.scrollY}px`;
+          return { dx: clientX - left, dy: clientY - top };
+        };
+
+        const holdGap = () => {
+          const parent = sticker.parentNode;
+          const next = sticker.nextSibling;
+          const style = getComputedStyle(sticker);
+          const gap = sticker.offsetWidth + parseFloat(style.marginLeft) + parseFloat(style.marginRight);
+          const spacer = document.createElement("span");
+          spacer.className = "sticker-gap";
+          spacer.style.width = `${gap}px`;
+          spacer.style.height = `${sticker.offsetHeight}px`;
+          spacer.style.verticalAlign = style.verticalAlign;
+          parent.insertBefore(spacer, sticker);
+          return { parent, next, spacer, closing: false };
+        };
+
+        const startClosing = (home) => {
+          if (!home || home.closing) return;
+          home.closing = true;
+          requestAnimationFrame(() => {
+            home.spacer.style.width = "0px";
+          });
+        };
+
+        const putBack = (home) => {
+          home.spacer.remove();
+          home.parent.insertBefore(sticker, home.next);
+          sticker.style.position = "";
+          sticker.style.left = "";
+          sticker.style.top = "";
+          sticker.classList.remove("is-dragging");
+        };
+
+        sticker.addEventListener("pointerdown", (event) => {
+          if (event.button !== 0) return;
+          event.preventDefault();
+          const rect = sticker.getBoundingClientRect();
+          const width = sticker.offsetWidth;
+          const height = sticker.offsetHeight;
+          const left = rect.left + rect.width / 2 - width / 2;
+          const top = rect.top + rect.height / 2 - height / 2;
+          const home = sticker.classList.contains("is-placed") ? null : holdGap();
+          sticker.style.margin = "0";
+          sticker.style.position = "fixed";
+          sticker.style.left = `${left}px`;
+          sticker.style.top = `${top}px`;
+          drag = {
+            dx: event.clientX - left,
+            dy: event.clientY - top,
+            startX: event.clientX,
+            startY: event.clientY,
+            moved: Boolean(!home),
+            home,
+          };
+          sticker.classList.add("is-dragging");
+          document.body.appendChild(sticker);
+          try {
+            sticker.setPointerCapture(event.pointerId);
+          } catch (error) {}
+        });
+
+        sticker.addEventListener("pointermove", (event) => {
+          if (!drag) return;
+          sticker.style.left = `${event.clientX - drag.dx}px`;
+          sticker.style.top = `${event.clientY - drag.dy}px`;
+          if (drag.moved) return;
+          const distance = Math.hypot(event.clientX - drag.startX, event.clientY - drag.startY);
+          if (distance < 6) return;
+          drag.moved = true;
+          startClosing(drag.home);
+        });
+
+        const drop = (event) => {
+          if (!drag) return;
+          if (!drag.moved) {
+            putBack(drag.home);
+            drag = null;
+            return;
+          }
+          sticker.style.left = `${event.clientX - drag.dx}px`;
+          sticker.style.top = `${event.clientY - drag.dy}px`;
+          pin(event.clientX, event.clientY, false);
+          sticker.classList.remove("is-dragging");
+          sticker.classList.add("is-placed");
+          drag = null;
+        };
+
+        sticker.addEventListener("pointerup", drop);
+        sticker.addEventListener("pointercancel", drop);
       });
     </script>
   </body>

@@ -305,6 +305,34 @@
         transform: rotate(-5deg);
       }
 
+      .sticker-gap {
+        display: inline-block;
+        overflow: hidden;
+        vertical-align: baseline;
+        transition: width 0.5s var(--ease);
+      }
+
+      .logo,
+      .sticker {
+        cursor: grab;
+        touch-action: none;
+        user-select: none;
+        -webkit-user-drag: none;
+      }
+
+      .logo.is-dragging,
+      .sticker.is-dragging,
+      .logo.is-placed,
+      .sticker.is-placed {
+        z-index: 40;
+        margin: 0;
+      }
+
+      .logo.is-dragging,
+      .sticker.is-dragging {
+        cursor: grabbing;
+      }
+
       .about ul {
         margin: 0;
         padding-left: 1.2em;
