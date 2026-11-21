@@ -10,7 +10,7 @@
       href="https://fonts.googleapis.com/css2?family=Geist:wght@400&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=hackathon-cycle" />
+    <link rel="stylesheet" href="styles.css?v=sticker-baseline" />
   </head>
   <body>
     <div class="shell is-about">
@@ -116,12 +116,19 @@
         sticker.draggable = false;
         let drag = null;
 
-        const pin = (clientX, clientY, fixed) => {
+        const place = () => {
           const rect = sticker.getBoundingClientRect();
           const width = sticker.offsetWidth;
           const height = sticker.offsetHeight;
-          const left = rect.left + rect.width / 2 - width / 2;
-          const top = rect.top + rect.height / 2 - height / 2;
+          const shift = new DOMMatrix(getComputedStyle(sticker).transform);
+          return {
+            left: rect.left + rect.width / 2 - width / 2 - shift.m41,
+            top: rect.top + rect.height / 2 - height / 2 - shift.m42,
+          };
+        };
+
+        const pin = (clientX, clientY, fixed) => {
+          const { left, top } = place();
           sticker.style.position = fixed ? "fixed" : "absolute";
           sticker.style.left = `${fixed ? left : left + window.scrollX}px`;
           sticker.style.top = `${fixed ? top : top + window.scrollY}px`;
@@ -137,8 +144,9 @@
           spacer.className = "sticker-gap";
           spacer.style.width = `${gap}px`;
           spacer.style.height = `${sticker.offsetHeight}px`;
+          spacer.style.marginTop = style.marginTop;
+          spacer.style.marginBottom = style.marginBottom;
           spacer.style.verticalAlign = style.verticalAlign;
-          parent.insertBefore(spacer, sticker);
           return { parent, next, spacer, closing: false };
         };
 
@@ -156,22 +164,22 @@
           sticker.style.position = "";
           sticker.style.left = "";
           sticker.style.top = "";
+          sticker.style.margin = "";
           sticker.classList.remove("is-dragging");
         };
 
         sticker.addEventListener("pointerdown", (event) => {
           if (event.button !== 0) return;
           event.preventDefault();
-          const rect = sticker.getBoundingClientRect();
-          const width = sticker.offsetWidth;
-          const height = sticker.offsetHeight;
-          const left = rect.left + rect.width / 2 - width / 2;
-          const top = rect.top + rect.height / 2 - height / 2;
+          const { left, top } = place();
           const home = sticker.classList.contains("is-placed") ? null : holdGap();
+          document.body.appendChild(sticker);
           sticker.style.margin = "0";
           sticker.style.position = "fixed";
           sticker.style.left = `${left}px`;
           sticker.style.top = `${top}px`;
+          sticker.classList.add("is-dragging");
+          if (home) home.parent.insertBefore(home.spacer, home.next);
           drag = {
             dx: event.clientX - left,
             dy: event.clientY - top,
@@ -180,8 +188,6 @@
             moved: Boolean(!home),
             home,
           };
-          sticker.classList.add("is-dragging");
-          document.body.appendChild(sticker);
           try {
             sticker.setPointerCapture(event.pointerId);
           } catch (error) {}
