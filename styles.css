@@ -305,6 +305,12 @@
         transform: rotate(-5deg);
       }
 
+      .sticker.canada {
+        height: 26px;
+        vertical-align: -0.5em;
+        transform: rotate(-8deg);
+      }
+
       .sticker-gap {
         display: inline-block;
         overflow: hidden;
