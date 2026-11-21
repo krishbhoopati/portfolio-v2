@@ -1,0 +1,14 @@
+---
+description: Split work into separate commits so each change counts
+alwaysApply: true
+---
+
+# Maximize contributions
+
+When the user asks to commit or push, record the work as separate commits. One commit does one thing.
+
+- Match this repo's history: a single imperative sentence about why the change exists.
+- Keep each real change in its own commit instead of squashing the session into one.
+- Include only the files that belong to that change.
+- Do not create empty commits, rewrite dates, or split a change that cannot stand on its own.
+- Push those commits to the requested branch. Do not force-push main.
