@@ -431,7 +431,6 @@
       }
 
       .contributions-total a:hover,
-      .contributions-foot a:hover,
       .contributions-status a:hover {
         text-decoration: underline;
         text-underline-offset: 0.18em;
@@ -610,7 +609,7 @@
         display: flex;
         flex-wrap: wrap;
         align-items: flex-end;
-        justify-content: space-between;
+        justify-content: flex-end;
         gap: 8px 16px;
         margin-top: 12px;
         color: #656d76;
