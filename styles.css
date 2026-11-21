@@ -270,6 +270,41 @@
         vertical-align: -0.28em;
       }
 
+      .about .sticker-word {
+        white-space: nowrap;
+      }
+
+      .sticker {
+        height: 28px;
+        width: auto;
+        margin: 0 0.22em 0 0.16em;
+        vertical-align: -0.42em;
+      }
+
+      .sticker.youtube {
+        transform: rotate(-7deg);
+      }
+
+      .sticker.lemon {
+        height: 32px;
+        vertical-align: -0.55em;
+        transform: rotate(8deg);
+      }
+
+      .sticker.maple {
+        height: 36px;
+        vertical-align: -0.68em;
+        transform: rotate(-4deg);
+      }
+
+      .sticker.sunlife {
+        transform: rotate(6deg);
+      }
+
+      .sticker.td {
+        transform: rotate(-5deg);
+      }
+
       .about ul {
         margin: 0;
         padding-left: 1.2em;
