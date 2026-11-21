@@ -301,6 +301,8 @@
         const tip = document.querySelector(".contributions-tip");
         const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
         let activeCell = null;
+        let signature = "";
+        let refreshing = false;
 
         const parseDate = (iso) => {
           const [year, month, day] = iso.split("-").map(Number);
@@ -378,6 +380,11 @@
             count: entry.count,
           }));
           const total = data.total?.lastYear ?? days.reduce((sum, day) => sum + day.count, 0);
+          const nextSignature = `${total}:${days.map((day) => `${day.date.getTime()}:${day.count}`).join(",")}`;
+          if (nextSignature === signature) return;
+          signature = nextSignature;
+          months.replaceChildren();
+          grid.replaceChildren();
           totalLink.replaceChildren();
           const count = document.createElement("span");
           count.textContent = total.toLocaleString("en-US");
@@ -439,7 +446,7 @@
             grid.appendChild(cell);
           });
 
-          status.remove();
+          if (status.isConnected) status.remove();
           chart.hidden = false;
           foot.hidden = false;
           requestAnimationFrame(() => {
@@ -448,6 +455,7 @@
         };
 
         const fail = () => {
+          if (signature) return;
           status.replaceChildren(document.createTextNode("Couldn’t load the contribution graph. "));
           const link = document.createElement("a");
           link.href = "https://github.com/krishbhoopati";
@@ -469,13 +477,41 @@
           if (activeCell) placeTip(activeCell);
         });
 
-        fetch("https://github-contributions-api.jogruber.de/v4/krishbhoopati?y=last")
-          .then((response) => {
-            if (!response.ok) throw new Error(String(response.status));
-            return response.json();
-          })
-          .then(render)
-          .catch(fail);
+        const readGraph = async (url) => {
+          const response = await fetch(url, { cache: "no-store" });
+          if (!response.ok) throw new Error(String(response.status));
+          const data = await response.json();
+          if (!Array.isArray(data.contributions) || data.contributions.length === 0) {
+            throw new Error("empty");
+          }
+          return data;
+        };
+
+        const refresh = async () => {
+          if (refreshing) return;
+          refreshing = true;
+          try {
+            let data;
+            try {
+              data = await readGraph("/api/contributions");
+            } catch {
+              data = await readGraph("https://github-contributions-api.jogruber.de/v4/krishbhoopati?y=last");
+            }
+            render(data);
+          } catch {
+            fail();
+          } finally {
+            refreshing = false;
+          }
+        };
+
+        refresh();
+        window.setInterval(() => {
+          if (!document.hidden) refresh();
+        }, 20000);
+        document.addEventListener("visibilitychange", () => {
+          if (!document.hidden) refresh();
+        });
       }
     </script>
   </body>
