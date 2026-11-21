@@ -333,6 +333,49 @@
         cursor: grabbing;
       }
 
+      .hover-photo {
+        position: relative;
+        text-decoration: underline;
+        text-underline-offset: 0.15em;
+        cursor: default;
+      }
+
+      .hover-photo-pop {
+        position: absolute;
+        z-index: 30;
+        left: 50%;
+        bottom: 100%;
+        width: min(400px, calc(100vw - 48px));
+        padding-bottom: 10px;
+        pointer-events: none;
+        opacity: 0;
+        transform: translateX(-50%) translateY(8px) scale(0.96);
+        transform-origin: center bottom;
+        transition: opacity 0.22s var(--ease), transform 0.22s var(--ease);
+      }
+
+      .hover-photo-pop img {
+        display: block;
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+        box-shadow: 0 12px 32px rgba(20, 24, 28, 0.18);
+      }
+
+      .hover-photo:hover .hover-photo-pop,
+      .hover-photo:focus-visible .hover-photo-pop {
+        pointer-events: auto;
+        opacity: 1;
+        transform: translateX(-50%) translateY(0) scale(1);
+      }
+
+      .hover-photo.mark {
+        text-decoration: none;
+        background-color: #fff3a8;
+        box-decoration-break: clone;
+        -webkit-box-decoration-break: clone;
+      }
+
       .about ul {
         margin: 0;
         padding-left: 1.2em;
