@@ -375,6 +375,19 @@
         transform: translateX(-50%) translateY(0) scale(1);
       }
 
+      .hover-photo-cycle .hover-photo-pop img:not(.is-current) {
+        display: none;
+      }
+
+      .hover-photo-cycle .hover-photo-pop img.is-current {
+        animation: hover-photo-in 0.35s var(--ease);
+      }
+
+      @keyframes hover-photo-in {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+
       .hover-photo.mark {
         text-decoration: none;
         background-color: #fff3a8;
