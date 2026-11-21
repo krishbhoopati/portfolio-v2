@@ -225,6 +225,11 @@
         flex-direction: column;
       }
 
+      .is-about .stage {
+        justify-content: center;
+        align-items: center;
+      }
+
       .stage-row {
         display: flex;
         flex: 1;
@@ -239,8 +244,8 @@
       }
 
       .about {
-        max-width: 34rem;
-        padding: 0 var(--page) 96px;
+        width: min(52rem, 100%);
+        padding: var(--page);
       }
 
       .about p,
@@ -619,6 +624,17 @@
           padding-right: var(--pad);
         }
 
+        .is-about .stage {
+          justify-content: flex-start;
+          padding: 0;
+        }
+
+        .is-about .about {
+          width: min(52rem, calc(100vw - 2 * (var(--sidebar) + var(--pad)) - 48px));
+          margin-top: calc(var(--pad) + 4 * (4px + 19.5px) + 46px);
+          transform: translateX(calc((var(--sidebar) + var(--pad)) / -2));
+        }
+
         .stage-row {
           flex-direction: row;
         }
@@ -630,6 +646,10 @@
 
         .work {
           padding-bottom: var(--pad);
+        }
+
+        .about {
+          padding: 0;
         }
 
         .catalog,
