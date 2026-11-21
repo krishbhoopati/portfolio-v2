@@ -7,10 +7,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Geist:wght@400&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=sticker-baseline" />
+    <link rel="stylesheet" href="styles.css?v=soil2" />
   </head>
   <body>
     <div class="shell is-about">
@@ -99,9 +99,45 @@
           <p>That eventually led me to the <span class="hover-photo">DMZ<span class="hover-photo-pop"><img src="media/dmz.png?v=2" alt=""></span></span>, where I joined their startup accelerator, pitched at <span class="hover-photo">Collision Conference<span class="hover-photo-pop"><img src="media/collision.jpg" alt=""></span></span> in front of thousands of people, became one of their <span class="hover-photo mark">youngest winners at 18<span class="hover-photo-pop"><img src="media/youngest.jpg" alt=""></span></span>, and secured ~$5K in grants from the <span class="hover-photo">1517 Fund<span class="hover-photo-pop"><img src="media/1517.png" alt=""></span></span>, DMZ, and others. Now I'm on the other side of the table at <span class="hover-photo">Front Row Ventures<span class="hover-photo-pop"><img src="media/frv.jpg" alt=""></span></span>, helping back <span class="sticker-word"><img class="sticker canada" src="media/canada.png" alt="">Canadian</span> student founders with $50K pre-seed cheques.</p>
           <p>I started going to <span class="hover-photo hover-photo-cycle">hackathons<span class="hover-photo-pop"><img class="is-current" src="media/hackathon-1.jpg" alt=""><img src="media/hackathon-2.jpg" alt=""><img src="media/hackathon-3.jpg" alt=""><img src="media/hackathon-4.jpg" alt=""><img src="media/hackathon-5.jpg" alt=""></span></span> in April 2026 and have won 7 since. That's where I really fell in love with building technology and decided to go all in.</p>
           <p>Last summer, I helped bring AI to thousands of employees at <span class="sticker-word"><img class="sticker maple" src="media/maple.png" alt="">Maple</span> Leaf Foods, running workshops and building tools to make it easier to use. Today, I'm at <span class="sticker-word"><img class="sticker sunlife" src="media/sunlife.png" alt="">Sun</span> Life, where I've taken an internal product from 0 to 1, owning everything from development and testing, to soon launch. It will then be used by 30+ people. This winter, I'll be joining <span class="sticker-word"><img class="sticker td" src="media/td.png" alt="">TD</span> as a Business Systems Analyst.</p>
+          <figure class="contributions">
+            <p class="contributions-total" id="contributions-total">
+              <a href="https://github.com/krishbhoopati" target="_blank" rel="noopener noreferrer">Contributions in the last year</a>
+            </p>
+            <div class="contributions-card">
+              <p class="contributions-status">Loading contributions…</p>
+              <div class="contributions-chart" data-chart hidden>
+                <div class="contributions-days" aria-hidden="true">
+                  <span></span>
+                  <span>Mon</span>
+                  <span></span>
+                  <span>Wed</span>
+                  <span></span>
+                  <span>Fri</span>
+                  <span></span>
+                </div>
+                <div class="contributions-scroll" data-scroll tabindex="0" aria-labelledby="contributions-total">
+                  <div class="contributions-months" data-months></div>
+                  <div class="contributions-grid" data-grid></div>
+                </div>
+              </div>
+              <div class="contributions-foot" data-foot hidden>
+                <a href="https://docs.github.com/en/account-and-profile/concepts/contributions-on-your-profile" target="_blank" rel="noopener noreferrer">Learn how we count contributions</a>
+                <div class="contributions-legend" aria-hidden="true">
+                  <span>Less</span>
+                  <span class="contributions-swatch" data-level="0"></span>
+                  <span class="contributions-swatch" data-level="1"></span>
+                  <span class="contributions-swatch" data-level="2"></span>
+                  <span class="contributions-swatch" data-level="3"></span>
+                  <span class="contributions-swatch" data-level="4"></span>
+                  <span>More</span>
+                </div>
+              </div>
+            </div>
+          </figure>
         </main>
       </div>
     </div>
+    <div class="contributions-tip" role="tooltip" hidden></div>
     <script>
       const menuButton = document.querySelector(".menu-button");
       const mobileNav = document.querySelector("#mobile-nav");
@@ -251,6 +287,196 @@
         el.addEventListener("focus", start);
         el.addEventListener("blur", stop);
       });
+    </script>
+    <script>
+      const contributionsRoot = document.querySelector(".contributions");
+      if (contributionsRoot) {
+        const totalLink = contributionsRoot.querySelector(".contributions-total a");
+        const status = contributionsRoot.querySelector(".contributions-status");
+        const chart = contributionsRoot.querySelector("[data-chart]");
+        const scroll = contributionsRoot.querySelector("[data-scroll]");
+        const months = contributionsRoot.querySelector("[data-months]");
+        const grid = contributionsRoot.querySelector("[data-grid]");
+        const foot = contributionsRoot.querySelector("[data-foot]");
+        const tip = document.querySelector(".contributions-tip");
+        const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        let activeCell = null;
+
+        const parseDate = (iso) => {
+          const [year, month, day] = iso.split("-").map(Number);
+          return new Date(year, month - 1, day);
+        };
+
+        const ordinal = (day) => {
+          const mod100 = day % 100;
+          if (mod100 >= 11 && mod100 <= 13) return `${day}th`;
+          switch (day % 10) {
+            case 1: return `${day}st`;
+            case 2: return `${day}nd`;
+            case 3: return `${day}rd`;
+            default: return `${day}th`;
+          }
+        };
+
+        const hideTip = () => {
+          activeCell = null;
+          tip.hidden = true;
+        };
+
+        const placeTip = (cell) => {
+          const bounds = scroll.getBoundingClientRect();
+          const rect = cell.getBoundingClientRect();
+          const outside = rect.right < bounds.left || rect.left > bounds.right || rect.bottom < bounds.top || rect.top > bounds.bottom;
+          if (outside) {
+            hideTip();
+            return;
+          }
+
+          tip.hidden = false;
+          tip.style.left = "0px";
+          tip.style.top = "0px";
+          tip.classList.remove("is-below");
+          const tipRect = tip.getBoundingClientRect();
+          const center = rect.left + rect.width / 2;
+          const half = tipRect.width / 2;
+          const clamped = Math.min(window.innerWidth - 8 - half, Math.max(8 + half, center));
+          const below = rect.top - tipRect.height - 14 < 8;
+          tip.classList.toggle("is-below", below);
+          tip.style.left = `${clamped}px`;
+          tip.style.top = `${below ? rect.bottom : rect.top}px`;
+          tip.style.setProperty("--arrow", `${center - clamped}px`);
+        };
+
+        const showTip = (cell, day) => {
+          const when = `${day.date.toLocaleDateString("en-US", { month: "long" })} ${ordinal(day.date.getDate())}, ${day.date.getFullYear()}`;
+          const strong = document.createElement("strong");
+          let rest = ` contributions on ${when}.`;
+          if (day.count === 0) {
+            strong.textContent = "No";
+          } else if (day.count === 1) {
+            strong.textContent = "1";
+            rest = ` contribution on ${when}.`;
+          } else {
+            strong.textContent = day.count.toLocaleString("en-US");
+          }
+          tip.replaceChildren(strong, document.createTextNode(rest));
+          activeCell = cell;
+          placeTip(cell);
+        };
+
+        const render = (data) => {
+          const plantLevel = (count) => {
+            if (count >= 15) return 4;
+            if (count >= 10) return 3;
+            if (count >= 5) return 2;
+            if (count >= 1) return 1;
+            return 0;
+          };
+
+          const days = data.contributions.map((entry) => ({
+            date: parseDate(entry.date),
+            count: entry.count,
+          }));
+          const total = data.total?.lastYear ?? days.reduce((sum, day) => sum + day.count, 0);
+          totalLink.replaceChildren();
+          const count = document.createElement("span");
+          count.textContent = total.toLocaleString("en-US");
+          totalLink.append(count, " contributions in the last year");
+
+          const cells = [...Array(days[0].date.getDay()).fill(null), ...days];
+          while (cells.length % 7 !== 0) cells.push(null);
+          const weeks = cells.length / 7;
+          contributionsRoot.style.setProperty("--weeks", String(weeks));
+
+          const labels = [];
+          const addLabel = (weekIndex, month) => {
+            const previous = labels[labels.length - 1];
+            if (previous && weekIndex === previous.weekIndex) labels.pop();
+            else if (previous && weekIndex - previous.weekIndex < 2) return;
+            labels.push({ weekIndex, month });
+          };
+
+          for (let week = 0; week < weeks; week += 1) {
+            const column = cells.slice(week * 7, week * 7 + 7);
+            const firstOfMonth = column.find((day) => day && day.date.getDate() === 1);
+            if (week === 0) {
+              const sample = column.find(Boolean);
+              if (sample) addLabel(0, sample.date.getMonth());
+            }
+            if (firstOfMonth) addLabel(week, firstOfMonth.date.getMonth());
+          }
+
+          labels.forEach((label) => {
+            const node = document.createElement("span");
+            node.textContent = monthNames[label.month];
+            node.style.gridColumn = String(label.weekIndex + 1);
+            months.appendChild(node);
+          });
+
+          cells.forEach((day) => {
+            if (!day) {
+              const pad = document.createElement("span");
+              pad.className = "contributions-pad";
+              grid.appendChild(pad);
+              return;
+            }
+            const cell = document.createElement("span");
+            cell.className = "contributions-cell";
+            cell.dataset.level = String(plantLevel(day.count));
+            cell.addEventListener("pointerenter", (event) => {
+              if (event.pointerType === "touch") return;
+              showTip(cell, day);
+            });
+            cell.addEventListener("pointerleave", (event) => {
+              if (event.pointerType === "touch") return;
+              if (activeCell === cell) hideTip();
+            });
+            cell.addEventListener("pointerdown", (event) => {
+              if (event.pointerType !== "touch") return;
+              if (activeCell === cell && !tip.hidden) hideTip();
+              else showTip(cell, day);
+            });
+            grid.appendChild(cell);
+          });
+
+          status.remove();
+          chart.hidden = false;
+          foot.hidden = false;
+          requestAnimationFrame(() => {
+            if (scroll.scrollWidth > scroll.clientWidth) scroll.scrollLeft = scroll.scrollWidth;
+          });
+        };
+
+        const fail = () => {
+          status.replaceChildren(document.createTextNode("Couldn’t load the contribution graph. "));
+          const link = document.createElement("a");
+          link.href = "https://github.com/krishbhoopati";
+          link.target = "_blank";
+          link.rel = "noopener noreferrer";
+          link.textContent = "View it on GitHub.";
+          status.appendChild(link);
+        };
+
+        document.addEventListener("pointerdown", (event) => {
+          if (!activeCell) return;
+          if (event.target instanceof Element && event.target.closest(".contributions-cell")) return;
+          hideTip();
+        });
+        document.addEventListener("scroll", () => {
+          if (activeCell) placeTip(activeCell);
+        }, true);
+        window.addEventListener("resize", () => {
+          if (activeCell) placeTip(activeCell);
+        });
+
+        fetch("https://github-contributions-api.jogruber.de/v4/krishbhoopati?y=last")
+          .then((response) => {
+            if (!response.ok) throw new Error(String(response.status));
+            return response.json();
+          })
+          .then(render)
+          .catch(fail);
+      }
     </script>
   </body>
 </html>
