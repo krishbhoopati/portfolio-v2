@@ -75,8 +75,8 @@
     var path = pathname.replace(/\/index\.html$/, "/");
     if (path.length > 1) path = path.replace(/\/$/, "");
     var file = path.split("/").pop();
-    if (file === "about.html") return "collapsed";
-    if (!file || file === "fun.html" || file === "writing.html") return "expanded";
+    if (!file || file === "about.html" || file === "index.html") return "collapsed";
+    if (file === "work.html" || file === "fun.html" || file === "writing.html") return "expanded";
     return null;
   }
 

@@ -1,20 +1,20 @@
 <!DOCTYPE html>
-<html lang="en" data-sidebar="expanded">
+<html lang="en" data-sidebar="collapsed">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Work</title>
+    <title>About</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300&family=Geist:wght@400;500&family=Newsreader:opsz,wght@16..72,500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css?v=nav-about-work" />
-    <script src="sidebar.js?v=4"></script>
+    <script src="sidebar.js?v=5"></script>
   </head>
   <body>
-    <div class="shell">
+    <div class="shell is-about">
       <aside class="sidebar">
         <div class="sidebar-bio">
           <div class="sidebar-bio-clip">
@@ -39,8 +39,8 @@
         </div>
         <nav class="nav" aria-label="Primary">
           <div class="nav-group">
-            <a href="about.html">About</a>
-            <a href="/" aria-current="page">Work<span class="mark" aria-hidden="true"></span></a>
+            <a href="/" aria-current="page">About<span class="mark" aria-hidden="true"></span></a>
+            <a href="work.html">Work</a>
           </div>
           <div class="nav-group">
             <p class="nav-label">Links</p>
@@ -81,8 +81,8 @@
       <div class="mobile-nav" id="mobile-nav">
         <nav class="nav" aria-label="Mobile">
           <div class="nav-group">
-            <a href="about.html">About</a>
-            <a href="/" aria-current="page">Work<span class="mark" aria-hidden="true"></span></a>
+            <a href="/" aria-current="page">About<span class="mark" aria-hidden="true"></span></a>
+            <a href="work.html">Work</a>
           </div>
           <div class="nav-group">
             <p class="nav-label">Links</p>
@@ -97,214 +97,51 @@
       </div>
 
       <div class="stage">
-        <div class="stage-row">
-          <main class="work" id="work">
-            <section class="catalog" aria-label="Projects">
-              <div class="column">
-                <a class="card" href="work/sun-life.html" aria-label="Sun Life, Strategy, 2026">
-                  <div class="frame medium frame-sunlife">
-                    <div class="shader-mount" id="sunlife-shader"></div>
-                    <p class="sunlife-headline sunlife-headline-card" id="sunlife-headline">Turning scattered trackers into connected systems so teams can make better decisions</p>
-                  </div>
-                  <div class="caption">
-                    <span>Sun Life</span>
-                    <span>Strategy, 2026</span>
-                  </div>
-                </a>
-                <a class="card" href="https://devpost.com/software/a-u-r-a-architectural-understanding-rendering-agent" target="_blank" rel="noopener noreferrer" aria-label="A.U.R.A, BearHacks, 2026">
-                  <div class="frame medium frame-video" style="--video-ratio: 16 / 9">
-                    <video
-                      class="card-video"
-                      data-src="media/aura.mp4"
-                      poster="media/posters/aura.jpg"
-                      autoplay
-                      muted
-                      loop
-                      playsinline
-                      webkit-playsinline
-                      preload="none"
-                      aria-hidden="true"
-                    ></video>
-                  </div>
-                  <div class="caption">
-                    <span>🏆 A.U.R.A / Best Use of Backboard API &amp; Best Use of Vultr</span>
-                    <span>BearHacks, 2026</span>
-                  </div>
-                </a>
-                <a class="card" href="https://devpost.com/software/molecule-gvue5i" target="_blank" rel="noopener noreferrer" aria-label="Molcule, Hack the North, 2026">
-                  <div class="frame medium frame-video" style="--video-ratio: 1600 / 1060">
-                    <video
-                      class="card-video"
-                      data-src="media/molcule.mp4"
-                      poster="media/posters/molcule.jpg"
-                      autoplay
-                      muted
-                      loop
-                      playsinline
-                      webkit-playsinline
-                      preload="none"
-                      aria-hidden="true"
-                    ></video>
-                  </div>
-                  <div class="caption">
-                    <span>🏆 Molcule / Finalist Github Universe</span>
-                    <span>Hack the North, 2026</span>
-                  </div>
-                </a>
-                <a class="card" href="https://devpost.com/software/pantry-state" target="_blank" rel="noopener noreferrer" aria-label="Pantry State, Cornell Design-a-thon, 2026">
-                  <div class="frame tall frame-video" style="--video-ratio: 1600 / 1060">
-                    <video
-                      class="card-video"
-                      data-src="media/pantry-state.mp4"
-                      poster="media/posters/pantry-state.jpg"
-                      autoplay
-                      muted
-                      loop
-                      playsinline
-                      webkit-playsinline
-                      preload="none"
-                      aria-hidden="true"
-                    ></video>
-                  </div>
-                  <div class="caption">
-                    <span>🏆 Pantry State / Winner</span>
-                    <span>Cornell Design-a-thon, 2026</span>
-                  </div>
-                </a>
+        <main class="page about">
+          <p>I've been building things ever since I was a kid, starting with <img class="logo" src="media/scratch.png?v=1" alt="Scratch">. At 10, I discovered <span class="sticker-word"><img class="sticker youtube" src="media/youtube.png" alt="">YouTube</span> tutorials and developed a delusional level of belief that I could learn just about anything.</p>
+          <p>At 11, I made my first $100 selling <span class="sticker-word"><img class="sticker lemon" src="media/lemon.png" alt="">lemonade</span> and convinced five of my friends to go door-to-door selling it with me (lol).</p>
+          <p>I later joined <span class="hover-photo">TKS<span class="hover-photo-pop"><img src="media/tks.png" alt=""></span></span>, which completely changed what I thought was possible. I met some incredible people who became lifelong mentors, spent time tinkering with self-driving cars, and worked on autonomous drones at 17.</p>
+          <p>That eventually led me to the <span class="hover-photo">DMZ<span class="hover-photo-pop"><img src="media/dmz.png?v=2" alt=""></span></span>, where I joined their startup accelerator, pitched at <span class="hover-photo">Collision Conference<span class="hover-photo-pop"><img src="media/collision.jpg" alt=""></span></span> in front of thousands of people, became one of their <span class="hover-photo mark">youngest winners at 18<span class="hover-photo-pop"><img src="media/youngest.jpg" alt=""></span></span>, and secured ~$5K in grants from the <span class="hover-photo">1517 Fund<span class="hover-photo-pop"><img src="media/1517.png" alt=""></span></span>, DMZ, and others. Now I'm on the other side of the table at <span class="hover-photo">Front Row Ventures<span class="hover-photo-pop"><img src="media/frv.jpg" alt=""></span></span>, helping back <span class="sticker-word"><img class="sticker canada" src="media/canada.png" alt="">Canadian</span> student founders with $50K pre-seed cheques.</p>
+          <p>I started going to <span class="hover-photo hover-photo-cycle">hackathons<span class="hover-photo-pop"><img class="is-current" src="media/hackathon-1.jpg" alt=""><img src="media/hackathon-2.jpg" alt=""><img src="media/hackathon-3.jpg" alt=""><img src="media/hackathon-4.jpg" alt=""><img src="media/hackathon-5.jpg" alt=""></span></span> in April 2026 and have won 7 since. That's where I really fell in love with building technology and decided to go all in.</p>
+          <p>Last summer, I helped bring AI to thousands of employees at <span class="sticker-word"><img class="sticker maple" src="media/maple.png" alt="">Maple</span> Leaf Foods, running workshops and building tools to make it easier to use. Today, I'm at <span class="sticker-word"><img class="sticker sunlife" src="media/sunlife.png" alt="">Sun</span> Life, where I've taken an internal product from 0 to 1, owning everything from development and testing, to soon launch. It will then be used by 30+ people. This winter, I'll be joining <span class="sticker-word"><img class="sticker td" src="media/td.png" alt="">TD</span> as a Business Systems Analyst.</p>
+          <figure class="contributions">
+            <p class="contributions-total" id="contributions-total">
+              <a href="https://github.com/krishbhoopati" target="_blank" rel="noopener noreferrer">Contributions in the last year</a>
+            </p>
+            <div class="contributions-card">
+              <p class="contributions-status" hidden></p>
+              <div class="contributions-chart" data-chart>
+                <div class="contributions-days" aria-hidden="true">
+                  <span></span>
+                  <span>Mon</span>
+                  <span></span>
+                  <span>Wed</span>
+                  <span></span>
+                  <span>Fri</span>
+                  <span></span>
+                </div>
+                <div class="contributions-scroll" data-scroll tabindex="0" aria-labelledby="contributions-total">
+                  <div class="contributions-months" data-months></div>
+                  <div class="contributions-grid" data-grid></div>
+                </div>
               </div>
-              <div class="column">
-                <a class="card" href="work/maple-leaf-foods.html" aria-label="Maple Leaf Foods, Digital Innovation, 2026">
-                  <div class="frame tallest frame-maple">
-                    <div class="shader-mount" data-maple-ascii data-cell-size="12"></div>
-                    <div class="maple-stage">
-                      <div class="copilot" aria-hidden="true">
-                        <div class="copilot-rail">
-                          <div class="copilot-brand">
-                            <span class="copilot-mark"></span>
-                            Copilot
-                          </div>
-                          <div class="copilot-nav">
-                            <span class="copilot-item">
-                              <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12.5V10l7.1-7.1a1.2 1.2 0 0 1 1.7 0l.8.8a1.2 1.2 0 0 1 0 1.7L5.5 12.5H3z"/></svg>
-                              New chat
-                            </span>
-                            <span class="copilot-item">
-                              <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><circle cx="7" cy="7" r="3.2"/><path d="M9.4 9.4 12.2 12.2"/></svg>
-                              Search
-                            </span>
-                            <span class="copilot-item">
-                              <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"><path d="M3.2 3.2h3.2v9.6H3.2zM7.4 4.4h5.4v8.4H7.4z"/></svg>
-                              Library
-                            </span>
-                            <span class="copilot-item">
-                              <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><circle cx="8" cy="5.4" r="2"/><path d="M3.6 12.4c.7-1.9 2.3-2.8 4.4-2.8s3.7.9 4.4 2.8"/></svg>
-                              Agents
-                            </span>
-                            <span class="copilot-item">
-                              <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"><path d="M4 3.2h7.4A1.2 1.2 0 0 1 12.6 4.4v8.4H5.2A1.2 1.2 0 0 1 4 11.6V3.2z"/><path d="M4 3.2v8.4"/></svg>
-                              Notebooks
-                            </span>
-                          </div>
-                          <p class="copilot-chats">Chats</p>
-                        </div>
-                        <div class="copilot-main">
-                          <div class="copilot-top">
-                            <span class="copilot-mark"></span>
-                            Copilot
-                          </div>
-                          <div class="copilot-thread">
-                            <div class="copilot-msg copilot-msg-user">
-                              <p>What did you work on at Maple Leaf Foods?</p>
-                            </div>
-                            <div class="copilot-msg copilot-msg-assistant">
-                              <span class="copilot-mark"></span>
-                              <p class="copilot-msg-body">Placeholder answer. This is where Copilot will walk through the work — the problem, what got built, and what changed. Replace this copy when the real story is ready.</p>
-                            </div>
-                          </div>
-                          <div class="copilot-composer">
-                            <div class="copilot-composer-bar">
-                              <span class="copilot-plus">+</span>
-                              <p class="copilot-composer-text is-placeholder">Message Copilot</p>
-                              <svg class="copilot-mic" viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M8 2.6a1.8 1.8 0 0 1 1.8 1.8v2.8a1.8 1.8 0 0 1-3.6 0V4.4A1.8 1.8 0 0 1 8 2.6z"/><path d="M4.8 7.4a3.2 3.2 0 0 0 6.4 0M8 10.6v2"/></svg>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="caption">
-                    <span>Maple Leaf Foods</span>
-                    <span>Digital Innovation, 2026</span>
-                  </div>
-                </a>
-                <a class="card" href="https://devpost.com/software/twin-sli6v1" target="_blank" rel="noopener noreferrer" aria-label="TechTo, Hackthe6ix, 2026">
-                  <div class="frame tallest frame-video" style="--video-ratio: 1600 / 1060">
-                    <video
-                      class="card-video"
-                      data-src="media/techto.mp4"
-                      poster="media/posters/techto.jpg"
-                      autoplay
-                      muted
-                      loop
-                      playsinline
-                      webkit-playsinline
-                      preload="none"
-                      aria-hidden="true"
-                    ></video>
-                  </div>
-                  <div class="caption">
-                    <span>🏆 TechTo / Best Use of MongoDB Atlas</span>
-                    <span>Hackthe6ix, 2026</span>
-                  </div>
-                </a>
-                <a class="card" href="https://devpost.com/software/playground-41cijq" target="_blank" rel="noopener noreferrer" aria-label="Playground, SummerHacks, 2026">
-                  <div class="frame tall frame-video" style="--video-ratio: 16 / 9">
-                    <video
-                      class="card-video"
-                      data-src="media/playground.mp4"
-                      poster="media/posters/playground.jpg"
-                      autoplay
-                      muted
-                      loop
-                      playsinline
-                      webkit-playsinline
-                      preload="none"
-                      aria-hidden="true"
-                    ></video>
-                  </div>
-                  <div class="caption">
-                    <span>🏆 Playground / 3rd Overall</span>
-                    <span>SummerHacks, 2026</span>
-                  </div>
-                </a>
-                <a class="card" href="https://devpost.com/software/spar-9getb3" target="_blank" rel="noopener noreferrer" aria-label="Spar, DDC x Ignition Hack, 2026">
-                  <div class="frame tallest frame-video" style="--video-ratio: 1600 / 1060">
-                    <video
-                      class="card-video"
-                      data-src="media/spar.mp4"
-                      poster="media/posters/spar.jpg"
-                      autoplay
-                      muted
-                      loop
-                      playsinline
-                      webkit-playsinline
-                      preload="none"
-                      aria-hidden="true"
-                    ></video>
-                  </div>
-                  <div class="caption">
-                    <span>🏆 Spar / Honourable Mention</span>
-                    <span>DDC x Ignition Hack, 2026</span>
-                  </div>
-                </a>
+              <div class="contributions-foot" data-foot>
+                <div class="contributions-legend" aria-hidden="true">
+                  <span>Less</span>
+                  <span class="contributions-swatch" data-level="0"></span>
+                  <span class="contributions-swatch" data-level="1"></span>
+                  <span class="contributions-swatch" data-level="2"></span>
+                  <span class="contributions-swatch" data-level="3"></span>
+                  <span class="contributions-swatch" data-level="4"></span>
+                  <span>More</span>
+                </div>
               </div>
-            </section>
-          </main>
-        </div>
+            </div>
+          </figure>
+        </main>
       </div>
     </div>
-    <script type="module" src="shader.js?v=30"></script>
-    <script type="module" src="maple-ascii.js?v=8"></script>
+    <div class="contributions-tip" role="tooltip" hidden></div>
     <script>
       const menuButton = document.querySelector(".menu-button");
       const mobileNav = document.querySelector("#mobile-nav");
@@ -315,37 +152,581 @@
         mobileNav.classList.toggle("is-open", !open);
       });
 
-      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      const playVideo = (video) => {
-        video.muted = true;
-        video.defaultMuted = true;
-        video.playsInline = true;
-        video.setAttribute("playsinline", "");
-        video.setAttribute("webkit-playsinline", "");
-        const attempt = () => {
-          const pending = video.play();
-          if (pending) pending.catch(() => {});
+      document.querySelectorAll(".sticker, .logo").forEach((sticker) => {
+        sticker.draggable = false;
+        let drag = null;
+
+        const place = () => {
+          const rect = sticker.getBoundingClientRect();
+          const width = sticker.offsetWidth;
+          const height = sticker.offsetHeight;
+          const shift = new DOMMatrix(getComputedStyle(sticker).transform);
+          return {
+            left: rect.left + rect.width / 2 - width / 2 - shift.m41,
+            top: rect.top + rect.height / 2 - height / 2 - shift.m42,
+          };
         };
-        if (video.readyState >= 2) attempt();
-        else video.addEventListener("canplay", attempt, { once: true });
-      };
 
-      const videoObserver = new IntersectionObserver((entries) => {
-        for (const entry of entries) {
-          const video = entry.target;
-          if (entry.isIntersecting) {
-            if (!video.getAttribute("src") && video.dataset.src) {
-              video.preload = "auto";
-              video.src = video.dataset.src;
-            }
-            if (!reduceMotion) playVideo(video);
-          } else if (!video.paused) {
-            video.pause();
+        const pin = (clientX, clientY, fixed) => {
+          const { left, top } = place();
+          sticker.style.position = fixed ? "fixed" : "absolute";
+          sticker.style.left = `${fixed ? left : left + window.scrollX}px`;
+          sticker.style.top = `${fixed ? top : top + window.scrollY}px`;
+          return { dx: clientX - left, dy: clientY - top };
+        };
+
+        const holdGap = () => {
+          const parent = sticker.parentNode;
+          const next = sticker.nextSibling;
+          const style = getComputedStyle(sticker);
+          const gap = sticker.offsetWidth + parseFloat(style.marginLeft) + parseFloat(style.marginRight);
+          const spacer = document.createElement("span");
+          spacer.className = "sticker-gap";
+          spacer.style.width = `${gap}px`;
+          spacer.style.height = `${sticker.offsetHeight}px`;
+          spacer.style.marginTop = style.marginTop;
+          spacer.style.marginBottom = style.marginBottom;
+          spacer.style.verticalAlign = style.verticalAlign;
+          return { parent, next, spacer, closing: false };
+        };
+
+        const startClosing = (home) => {
+          if (!home || home.closing) return;
+          home.closing = true;
+          requestAnimationFrame(() => {
+            home.spacer.style.width = "0px";
+          });
+        };
+
+        const putBack = (home) => {
+          home.spacer.remove();
+          home.parent.insertBefore(sticker, home.next);
+          sticker.style.position = "";
+          sticker.style.left = "";
+          sticker.style.top = "";
+          sticker.style.margin = "";
+          sticker.classList.remove("is-dragging");
+        };
+
+        sticker.addEventListener("pointerdown", (event) => {
+          if (event.button !== 0) return;
+          event.preventDefault();
+          const { left, top } = place();
+          const home = sticker.classList.contains("is-placed") ? null : holdGap();
+          document.body.appendChild(sticker);
+          sticker.style.margin = "0";
+          sticker.style.position = "fixed";
+          sticker.style.left = `${left}px`;
+          sticker.style.top = `${top}px`;
+          sticker.classList.add("is-dragging");
+          if (home) home.parent.insertBefore(home.spacer, home.next);
+          drag = {
+            dx: event.clientX - left,
+            dy: event.clientY - top,
+            startX: event.clientX,
+            startY: event.clientY,
+            moved: Boolean(!home),
+            home,
+          };
+          try {
+            sticker.setPointerCapture(event.pointerId);
+          } catch (error) {}
+        });
+
+        sticker.addEventListener("pointermove", (event) => {
+          if (!drag) return;
+          sticker.style.left = `${event.clientX - drag.dx}px`;
+          sticker.style.top = `${event.clientY - drag.dy}px`;
+          if (drag.moved) return;
+          const distance = Math.hypot(event.clientX - drag.startX, event.clientY - drag.startY);
+          if (distance < 6) return;
+          drag.moved = true;
+          startClosing(drag.home);
+        });
+
+        const drop = (event) => {
+          if (!drag) return;
+          if (!drag.moved) {
+            putBack(drag.home);
+            drag = null;
+            return;
           }
-        }
-      }, { rootMargin: "400px 0px" });
+          sticker.style.left = `${event.clientX - drag.dx}px`;
+          sticker.style.top = `${event.clientY - drag.dy}px`;
+          pin(event.clientX, event.clientY, false);
+          sticker.classList.remove("is-dragging");
+          sticker.classList.add("is-placed");
+          drag = null;
+        };
 
-      document.querySelectorAll(".card-video").forEach((video) => videoObserver.observe(video));
+        sticker.addEventListener("pointerup", drop);
+        sticker.addEventListener("pointercancel", drop);
+      });
+
+      document.querySelectorAll(".hover-photo-cycle").forEach((el) => {
+        const imgs = [...el.querySelectorAll(".hover-photo-pop img")];
+        if (imgs.length < 2) return;
+        let index = 0;
+        let timer = null;
+
+        const show = (n) => {
+          imgs.forEach((img, i) => img.classList.toggle("is-current", i === n));
+        };
+
+        const start = () => {
+          if (timer) return;
+          timer = setInterval(() => {
+            index = (index + 1) % imgs.length;
+            show(index);
+          }, 1000);
+        };
+
+        const stop = () => {
+          clearInterval(timer);
+          timer = null;
+        };
+
+        el.addEventListener("mouseenter", start);
+        el.addEventListener("mouseleave", stop);
+        el.addEventListener("focus", start);
+        el.addEventListener("blur", stop);
+      });
+    </script>
+    <script>
+      const contributionsRoot = document.querySelector(".contributions");
+      if (contributionsRoot) {
+        const totalLink = contributionsRoot.querySelector(".contributions-total a");
+        const status = contributionsRoot.querySelector(".contributions-status");
+        const chart = contributionsRoot.querySelector("[data-chart]");
+        const scroll = contributionsRoot.querySelector("[data-scroll]");
+        const months = contributionsRoot.querySelector("[data-months]");
+        const grid = contributionsRoot.querySelector("[data-grid]");
+        const foot = contributionsRoot.querySelector("[data-foot]");
+        const tip = document.querySelector(".contributions-tip");
+        const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        let activeCell = null;
+        let painted = false;
+        let signature = "";
+        let refreshing = false;
+        let aligned = false;
+        const dayByIso = new Map();
+        let planting = null;
+        const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const treeSizes = [0, 18, 16, 18, 20];
+
+        const clearPlanting = () => {
+          if (!planting) return;
+          const current = planting;
+          planting = null;
+          current.abort();
+          current.flyers.forEach((flyer) => flyer.remove());
+          contributionsRoot.classList.remove("is-planting");
+          grid.querySelectorAll("[data-falling]").forEach((cell) => delete cell.dataset.falling);
+        };
+
+        const plantTrees = () => {
+          if (reduceMotion) {
+            contributionsRoot.classList.add("is-planting");
+            const timer = window.setTimeout(() => {
+              contributionsRoot.classList.remove("is-planting");
+              grid.querySelectorAll("[data-falling]").forEach((cell) => delete cell.dataset.falling);
+            }, 220);
+            planting = {
+              abort: () => window.clearTimeout(timer),
+              flyers: [],
+            };
+            return;
+          }
+
+          const port = scroll.getBoundingClientRect();
+          const easing = getComputedStyle(document.documentElement).getPropertyValue("--ease").trim();
+          const motion = new AbortController();
+          const flyers = [];
+          const tracked = [];
+          const falling = [];
+
+          grid.querySelectorAll(".contributions-cell").forEach((cell) => {
+            const level = Number(cell.dataset.level);
+            if (!level) {
+              delete cell.dataset.falling;
+              return;
+            }
+            const rect = cell.getBoundingClientRect();
+            const inView = rect.right > port.left + 1 && rect.left < port.right - 1 && rect.bottom > port.top && rect.top < port.bottom;
+            if (!inView) {
+              delete cell.dataset.falling;
+              return;
+            }
+            falling.push(cell);
+          });
+
+          falling.sort((a, b) => Number(a.dataset.col) - Number(b.dataset.col) || Number(a.dataset.row) - Number(b.dataset.row));
+
+          falling.forEach((cell, index) => {
+            const level = Number(cell.dataset.level);
+            const size = treeSizes[level];
+            const flyer = document.createElement("span");
+            flyer.className = "contributions-flyer";
+            flyer.dataset.level = String(level);
+            flyer.setAttribute("aria-hidden", "true");
+            flyer.style.width = `${size}px`;
+            flyer.style.height = `${size}px`;
+            const place = () => {
+              const next = cell.getBoundingClientRect();
+              flyer.style.left = `${next.left + next.width / 2 - size / 2}px`;
+              flyer.style.top = `${next.bottom - size}px`;
+            };
+            place();
+            document.body.appendChild(flyer);
+
+            const animation = flyer.animate(
+              [
+                { opacity: 0, transform: "scale(5.5)" },
+                { opacity: 1, transform: "scale(3.4)", offset: 0.22 },
+                { opacity: 1, transform: "scale(1)" },
+              ],
+              { duration: 340, delay: index * 36, easing, fill: "both" },
+            );
+            const land = () => {
+              if (!flyer.isConnected) return;
+              flyer.remove();
+              delete cell.dataset.falling;
+              const index = flyers.indexOf(flyer);
+              if (index !== -1) flyers.splice(index, 1);
+              if (flyers.length === 0) {
+                motion.abort();
+                contributionsRoot.classList.remove("is-planting");
+                if (planting && planting.flyers === flyers) planting = null;
+              }
+            };
+            animation.onfinish = land;
+            animation.oncancel = land;
+            flyers.push(flyer);
+            tracked.push(place);
+          });
+
+          if (flyers.length === 0) {
+            contributionsRoot.classList.remove("is-planting");
+            return;
+          }
+
+          const follow = () => tracked.forEach((place) => place());
+          scroll.addEventListener("scroll", follow, { passive: true, signal: motion.signal });
+          window.addEventListener("scroll", follow, { passive: true, signal: motion.signal });
+          window.addEventListener("resize", follow, { signal: motion.signal });
+          planting = {
+            abort: () => motion.abort(),
+            flyers,
+          };
+        };
+
+        const parseDate = (iso) => {
+          const [year, month, day] = iso.split("-").map(Number);
+          return new Date(year, month - 1, day);
+        };
+
+        const ordinal = (day) => {
+          const mod100 = day % 100;
+          if (mod100 >= 11 && mod100 <= 13) return `${day}th`;
+          switch (day % 10) {
+            case 1: return `${day}st`;
+            case 2: return `${day}nd`;
+            case 3: return `${day}rd`;
+            default: return `${day}th`;
+          }
+        };
+
+        const hideTip = () => {
+          activeCell = null;
+          tip.hidden = true;
+        };
+
+        const placeTip = (cell) => {
+          const bounds = scroll.getBoundingClientRect();
+          const rect = cell.getBoundingClientRect();
+          const outside = rect.right < bounds.left || rect.left > bounds.right || rect.bottom < bounds.top || rect.top > bounds.bottom;
+          if (outside) {
+            hideTip();
+            return;
+          }
+
+          tip.hidden = false;
+          tip.style.left = "0px";
+          tip.style.top = "0px";
+          tip.classList.remove("is-below");
+          const tipRect = tip.getBoundingClientRect();
+          const center = rect.left + rect.width / 2;
+          const half = tipRect.width / 2;
+          const clamped = Math.min(window.innerWidth - 8 - half, Math.max(8 + half, center));
+          const below = rect.top - tipRect.height - 14 < 8;
+          tip.classList.toggle("is-below", below);
+          tip.style.left = `${clamped}px`;
+          tip.style.top = `${below ? rect.bottom : rect.top}px`;
+          tip.style.setProperty("--arrow", `${center - clamped}px`);
+        };
+
+        const plantLevel = (count) => {
+          if (count >= 15) return 4;
+          if (count >= 10) return 3;
+          if (count >= 5) return 2;
+          if (count >= 1) return 1;
+          return 0;
+        };
+
+        const isoFromDate = (date) => {
+          const month = String(date.getMonth() + 1).padStart(2, "0");
+          const day = String(date.getDate()).padStart(2, "0");
+          return `${date.getFullYear()}-${month}-${day}`;
+        };
+
+        const emptyYear = () => {
+          const end = new Date();
+          end.setHours(0, 0, 0, 0);
+          const start = new Date(end);
+          start.setFullYear(start.getFullYear() - 1);
+          start.setDate(start.getDate() + 1);
+          start.setDate(start.getDate() - start.getDay());
+          const days = [];
+          for (let cursor = new Date(start); cursor <= end; cursor.setDate(cursor.getDate() + 1)) {
+            const date = new Date(cursor);
+            days.push({ date, iso: isoFromDate(date), count: 0 });
+          }
+          return days;
+        };
+
+        const showTip = (cell, day) => {
+          const when = `${day.date.toLocaleDateString("en-US", { month: "long" })} ${ordinal(day.date.getDate())}, ${day.date.getFullYear()}`;
+          const strong = document.createElement("strong");
+          let rest = ` contributions on ${when}.`;
+          if (day.count === 0) {
+            strong.textContent = "No";
+          } else if (day.count === 1) {
+            strong.textContent = "1";
+            rest = ` contribution on ${when}.`;
+          } else {
+            strong.textContent = day.count.toLocaleString("en-US");
+          }
+          tip.replaceChildren(strong, document.createTextNode(rest));
+          activeCell = cell;
+          placeTip(cell);
+        };
+
+        const beginPlanting = () => {
+          if (painted) return;
+          painted = true;
+          contributionsRoot.classList.add("is-planting");
+          const begin = () => {
+            requestAnimationFrame(plantTrees);
+          };
+          const rect = chart.getBoundingClientRect();
+          const seen = rect.height > 0 && rect.bottom > 64 && rect.top < window.innerHeight - 48;
+          if (seen) {
+            requestAnimationFrame(begin);
+          } else {
+            const observer = new IntersectionObserver((entries) => {
+              if (!entries.some((entry) => entry.isIntersecting)) return;
+              observer.disconnect();
+              begin();
+            }, { threshold: 0.4 });
+            observer.observe(chart);
+          }
+        };
+
+        const render = (data, { animate = true } = {}) => {
+          const today = new Date();
+          today.setHours(0, 0, 0, 0);
+          let ahead = 0;
+          const days = [];
+          data.contributions.forEach((entry) => {
+            const date = parseDate(entry.date);
+            if (date > today) {
+              ahead += entry.count;
+              return;
+            }
+            days.push({ date, iso: entry.date, count: entry.count });
+          });
+          if (days.length === 0) {
+            fail();
+            return;
+          }
+          const summed = days.reduce((sum, day) => sum + day.count, 0);
+          const total = data.total?.lastYear != null ? data.total.lastYear - ahead : summed;
+          const nextSignature = `${total}:${days.map((day) => `${day.iso}:${day.count}`).join(",")}`;
+          if (animate) {
+            if (painted && nextSignature === signature) return;
+            if (planting) return;
+            signature = nextSignature;
+          }
+          days.forEach((day) => dayByIso.set(day.iso, day));
+          const openDate = activeCell?.dataset.date || "";
+          const existing = [...grid.querySelectorAll(".contributions-cell")];
+          const sameGrid = existing.length === days.length && days.every((day, index) => existing[index].dataset.date === day.iso);
+
+          if (animate) {
+            totalLink.replaceChildren();
+            const count = document.createElement("span");
+            count.textContent = total.toLocaleString("en-US");
+            totalLink.append(count, " contributions in the last year");
+          }
+
+          if (sameGrid) {
+            days.forEach((day, index) => {
+              const level = plantLevel(day.count);
+              existing[index].dataset.level = String(level);
+              if (animate && !painted && level > 0) existing[index].dataset.falling = "true";
+            });
+            status.hidden = true;
+            if (animate) beginPlanting();
+            if (openDate) {
+              const reopen = grid.querySelector(`[data-date="${openDate}"]`);
+              const reopenDay = dayByIso.get(openDate);
+              if (reopen && reopenDay) showTip(reopen, reopenDay);
+            }
+            return;
+          }
+
+          if (painted) clearPlanting();
+          months.replaceChildren();
+          grid.replaceChildren();
+
+          const cells = [...Array(days[0].date.getDay()).fill(null), ...days];
+          while (cells.length % 7 !== 0) cells.push(null);
+          const weeks = cells.length / 7;
+          contributionsRoot.style.setProperty("--weeks", String(weeks));
+
+          const labels = [];
+          const addLabel = (weekIndex, month) => {
+            const previous = labels[labels.length - 1];
+            if (previous && weekIndex === previous.weekIndex) labels.pop();
+            else if (previous && weekIndex - previous.weekIndex < 2) return;
+            labels.push({ weekIndex, month });
+          };
+
+          for (let week = 0; week < weeks; week += 1) {
+            const column = cells.slice(week * 7, week * 7 + 7);
+            const firstOfMonth = column.find((day) => day && day.date.getDate() === 1);
+            if (week === 0) {
+              const sample = column.find(Boolean);
+              if (sample) addLabel(0, sample.date.getMonth());
+            }
+            if (firstOfMonth) addLabel(week, firstOfMonth.date.getMonth());
+          }
+
+          labels.forEach((label) => {
+            const node = document.createElement("span");
+            node.textContent = monthNames[label.month];
+            node.style.gridColumn = String(label.weekIndex + 1);
+            months.appendChild(node);
+          });
+
+          cells.forEach((day, index) => {
+            if (!day) {
+              const pad = document.createElement("span");
+              pad.className = "contributions-pad";
+              grid.appendChild(pad);
+              return;
+            }
+            const cell = document.createElement("span");
+            cell.className = "contributions-cell";
+            cell.dataset.date = day.iso;
+            cell.dataset.col = String(Math.floor(index / 7));
+            cell.dataset.row = String(index % 7);
+            cell.dataset.level = String(plantLevel(day.count));
+            if (animate && !painted && cell.dataset.level !== "0") cell.dataset.falling = "true";
+            cell.addEventListener("pointerenter", (event) => {
+              if (event.pointerType === "touch") return;
+              const current = dayByIso.get(cell.dataset.date);
+              if (current) showTip(cell, current);
+            });
+            cell.addEventListener("pointerleave", (event) => {
+              if (event.pointerType === "touch") return;
+              if (activeCell === cell) hideTip();
+            });
+            cell.addEventListener("pointerdown", (event) => {
+              if (event.pointerType !== "touch") return;
+              const current = dayByIso.get(cell.dataset.date);
+              if (!current) return;
+              if (activeCell === cell && !tip.hidden) hideTip();
+              else showTip(cell, current);
+            });
+            grid.appendChild(cell);
+          });
+
+          status.hidden = true;
+          chart.hidden = false;
+          foot.hidden = false;
+          const reopen = openDate ? grid.querySelector(`[data-date="${openDate}"]`) : null;
+          const reopenDay = dayByIso.get(openDate);
+          if (reopen && reopenDay) showTip(reopen, reopenDay);
+          else hideTip();
+          aligned = true;
+          if (scroll.scrollWidth > scroll.clientWidth) scroll.scrollLeft = scroll.scrollWidth;
+          if (animate) beginPlanting();
+        };
+
+        const fail = () => {
+          if (signature) return;
+          status.hidden = false;
+          status.replaceChildren(document.createTextNode("Couldn’t load the contribution graph. "));
+          const link = document.createElement("a");
+          link.href = "https://github.com/krishbhoopati";
+          link.target = "_blank";
+          link.rel = "noopener noreferrer";
+          link.textContent = "View it on GitHub.";
+          status.appendChild(link);
+        };
+
+        document.addEventListener("pointerdown", (event) => {
+          if (!activeCell) return;
+          if (event.target instanceof Element && event.target.closest(".contributions-cell")) return;
+          hideTip();
+        });
+        document.addEventListener("scroll", () => {
+          if (activeCell) placeTip(activeCell);
+        }, true);
+        window.addEventListener("resize", () => {
+          if (activeCell) placeTip(activeCell);
+        });
+
+        const readGraph = async (url) => {
+          const response = await fetch(url, { cache: "no-store" });
+          if (!response.ok) throw new Error(String(response.status));
+          const data = await response.json();
+          if (!Array.isArray(data.contributions) || data.contributions.length === 0) {
+            throw new Error("empty");
+          }
+          return data;
+        };
+
+        const refresh = async () => {
+          if (refreshing) return;
+          refreshing = true;
+          try {
+            let data;
+            try {
+              data = await readGraph("/api/contributions");
+            } catch {
+              data = await readGraph("https://github-contributions-api.jogruber.de/v4/krishbhoopati?y=last");
+            }
+            render(data);
+          } catch {
+            fail();
+          } finally {
+            refreshing = false;
+          }
+        };
+
+        render({
+          contributions: emptyYear().map((day) => ({ date: day.iso, count: 0 })),
+        }, { animate: false });
+        refresh();
+        window.setInterval(() => {
+          if (!document.hidden) refresh();
+        }, 20000);
+        document.addEventListener("visibilitychange", () => {
+          if (!document.hidden) refresh();
+        });
+      }
     </script>
   </body>
 </html>
