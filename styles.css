@@ -80,8 +80,10 @@
       .intro {
         max-width: var(--sidebar);
         margin: 0;
-        font-size: 12px;
-        line-height: 16.5px;
+        font-family: Geist, "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        line-height: 19.5px;
+        font-weight: 400;
         letter-spacing: -0.02em;
         white-space: pre-line;
         color: var(--text);
@@ -159,8 +161,9 @@
 
       .status p {
         margin: 0;
-        font-size: 12px;
-        line-height: 16.5px;
+        font-family: Geist, "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        line-height: 19.5px;
         font-weight: 400;
         letter-spacing: -0.02em;
       }
@@ -186,6 +189,7 @@
       .nav a,
       .nav-current {
         margin: 0;
+        font-family: Geist, "Helvetica Neue", Helvetica, Arial, sans-serif;
         font-size: 14px;
         line-height: 19.5px;
         font-weight: 400;
@@ -251,8 +255,9 @@
       .about p,
       .about li {
         margin: 0;
-        font-size: 16px;
-        line-height: 22px;
+        font-family: Geist, "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        line-height: 19.5px;
         font-weight: 400;
         letter-spacing: -0.02em;
       }
