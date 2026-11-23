@@ -528,12 +528,24 @@
         };
 
         const render = (data, { animate = true } = {}) => {
-          const days = data.contributions.map((entry) => ({
-            date: parseDate(entry.date),
-            iso: entry.date,
-            count: entry.count,
-          }));
-          const total = data.total?.lastYear ?? days.reduce((sum, day) => sum + day.count, 0);
+          const today = new Date();
+          today.setHours(0, 0, 0, 0);
+          let ahead = 0;
+          const days = [];
+          data.contributions.forEach((entry) => {
+            const date = parseDate(entry.date);
+            if (date > today) {
+              ahead += entry.count;
+              return;
+            }
+            days.push({ date, iso: entry.date, count: entry.count });
+          });
+          if (days.length === 0) {
+            fail();
+            return;
+          }
+          const summed = days.reduce((sum, day) => sum + day.count, 0);
+          const total = data.total?.lastYear != null ? data.total.lastYear - ahead : summed;
           const nextSignature = `${total}:${days.map((day) => `${day.iso}:${day.count}`).join(",")}`;
           if (animate) {
             if (painted && nextSignature === signature) return;
