@@ -976,9 +976,10 @@
         justify-content: space-between;
         gap: 16px;
         padding: 14px 0;
+        font-family: Geist, "Helvetica Neue", Helvetica, Arial, sans-serif;
         font-size: 16px;
         font-weight: 400;
-        line-height: 19.2px;
+        line-height: 22px;
         letter-spacing: -0.02em;
       }
 
@@ -1123,12 +1124,6 @@
         .frame.frame-video {
           height: auto;
           aspect-ratio: var(--video-ratio, 16 / 9);
-        }
-
-        .caption {
-          font-size: 13px;
-          line-height: 1;
-          letter-spacing: -0.02em;
         }
       }
 
