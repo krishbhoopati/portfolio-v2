@@ -1175,7 +1175,7 @@
 
         .is-about .about {
           width: min(52rem, calc(100vw - 2 * (var(--sidebar) + var(--pad)) - 48px));
-          margin-top: calc(var(--pad) + 4 * (4px + 19.5px) + 46px);
+          margin-top: calc(var(--pad) + 2 * (4px + 19.5px) + 46px);
           transform: translateX(calc((var(--sidebar) + var(--pad)) / -2));
         }
 
