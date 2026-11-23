@@ -1398,6 +1398,7 @@
         align-self: flex-start;
         align-items: flex-start;
         gap: 10px;
+        max-width: 66.67%;
       }
 
       .copilot-msg-assistant .copilot-mark {
