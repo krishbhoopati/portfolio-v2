@@ -1408,6 +1408,26 @@
         position: relative;
       }
 
+      .copilot-msg-body p + p,
+      .copilot-msg-body .copilot-list,
+      .copilot-msg-body .copilot-list + p {
+        margin-top: 14px;
+      }
+
+      .copilot-list {
+        margin: 0;
+        padding-left: 1.35rem;
+        list-style: disc;
+      }
+
+      .copilot-list li {
+        padding-left: 0.35rem;
+      }
+
+      .copilot-list li + li {
+        margin-top: 8px;
+      }
+
       .copilot-sr {
         position: absolute;
         width: 1px;
