@@ -80,12 +80,6 @@
     return null;
   }
 
-  function measureShift() {
-    var clip = document.querySelector(".sidebar-bio-clip");
-    if (!clip) return 360;
-    return Math.round(Math.max(clip.scrollHeight, clip.getBoundingClientRect().height));
-  }
-
   document.addEventListener("click", function (event) {
     if (leaving || reduce || !desktop.matches) return;
     if (event.defaultPrevented || event.button !== 0) return;
@@ -99,10 +93,9 @@
 
     event.preventDefault();
     leaving = true;
-    root.style.setProperty("--sidebar-shift", measureShift() + "px");
     root.classList.add(target === "collapsed" ? "sidebar-leave-up" : "sidebar-leave-down");
 
-    var stage = document.querySelector(".stage");
+    var bio = document.querySelector(".sidebar-bio");
     var gone = false;
     function go() {
       if (gone) return;
@@ -110,9 +103,9 @@
       write(target);
       window.location.href = link.href;
     }
-    if (stage) {
-      stage.addEventListener("transitionend", function (endEvent) {
-        if (endEvent.target === stage && endEvent.propertyName === "transform") go();
+    if (bio) {
+      bio.addEventListener("transitionend", function (endEvent) {
+        if (endEvent.target === bio && endEvent.propertyName === "grid-template-rows") go();
       });
     }
     window.setTimeout(go, 520);

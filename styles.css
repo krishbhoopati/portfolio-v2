@@ -1142,20 +1142,6 @@
           visibility: visible;
         }
 
-        html.sidebar-leave-up .stage,
-        html.sidebar-leave-down .stage {
-          pointer-events: none;
-          transition: transform 450ms var(--ease-in-out);
-        }
-
-        html.sidebar-leave-up .stage {
-          transform: translateY(calc(-1 * var(--sidebar-shift, 0px)));
-        }
-
-        html.sidebar-leave-down .stage {
-          transform: translateY(var(--sidebar-shift, 0px));
-        }
-
         @media (prefers-reduced-motion: reduce) {
           .sidebar-bio,
           .stage {
