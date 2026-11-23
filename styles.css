@@ -87,6 +87,16 @@
         color: var(--text);
       }
 
+      .award {
+        margin: 12px 0 0;
+        font-family: Geist, "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        line-height: 19.5px;
+        font-weight: 400;
+        letter-spacing: -0.02em;
+        color: var(--text);
+      }
+
       .menu-button {
         position: relative;
         z-index: 50;
