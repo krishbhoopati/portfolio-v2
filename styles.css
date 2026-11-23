@@ -523,6 +523,7 @@
         display: block;
         width: var(--cell);
         height: var(--cell);
+        transition: translate 140ms var(--ease), box-shadow 140ms var(--ease);
       }
 
       .contributions-cell,
@@ -624,8 +625,25 @@
         z-index: 6;
       }
 
+      @media (hover: hover) and (pointer: fine) {
+        .contributions-cell:hover {
+          translate: 0 -2px;
+          box-shadow: 0 3px 4px rgba(74, 46, 22, 0.22);
+        }
+      }
+
       .contributions-cell:hover::before {
         filter: drop-shadow(0 1px 1px rgba(30, 50, 30, 0.35));
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .contributions-cell {
+          transition: none;
+        }
+
+        .contributions-cell:hover {
+          translate: none;
+        }
       }
 
       .contributions-swatch {
