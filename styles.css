@@ -57,8 +57,6 @@
         display: none;
       }
 
-      .is-about .intro,
-      .is-about .status,
       .is-about .mobile-header {
         display: none;
       }
@@ -1052,19 +1050,121 @@
           flex-direction: column;
           align-items: flex-start;
           padding: var(--pad) 0 var(--pad) var(--pad);
+          overflow-y: auto;
         }
 
-        .sidebar .status,
-        .sidebar .nav {
+        .sidebar .status {
           margin-top: 46px;
+          margin-bottom: 46px;
+        }
+
+        .sidebar-bio {
+          display: grid;
+          grid-template-rows: 1fr;
+          opacity: 1;
+          visibility: visible;
+          transition:
+            grid-template-rows 450ms var(--ease-in-out),
+            opacity 450ms var(--ease-in-out),
+            visibility 0s linear;
+        }
+
+        .sidebar-bio-clip {
+          min-height: 0;
+          overflow: hidden;
+        }
+
+        .is-about .sidebar-bio {
+          grid-template-rows: 0fr;
+          opacity: 0;
+          visibility: hidden;
+          transition:
+            grid-template-rows 450ms var(--ease-in-out),
+            opacity 450ms var(--ease-in-out),
+            visibility 0s linear 450ms;
+        }
+
+        html.sidebar-prep .sidebar-bio {
+          transition: none;
+        }
+
+        html.sidebar-prep .is-about .sidebar-bio {
+          grid-template-rows: 1fr;
+          opacity: 1;
+          visibility: visible;
+        }
+
+        html.sidebar-prep .shell:not(.is-about) .sidebar-bio {
+          grid-template-rows: 0fr;
+          opacity: 0;
+          visibility: hidden;
+        }
+
+        html.sidebar-hold .stage {
+          opacity: 0;
+          visibility: hidden;
+          pointer-events: none;
+          transition: none;
+        }
+
+        .stage {
+          transition:
+            opacity 200ms var(--ease),
+            visibility 0s linear;
+        }
+
+        html.sidebar-leave-up,
+        html.sidebar-leave-down {
+          overflow: hidden;
+        }
+
+        html.sidebar-leave-up .sidebar-bio,
+        html.sidebar-leave-down .sidebar-bio {
+          transition:
+            grid-template-rows 450ms var(--ease-in-out),
+            opacity 450ms var(--ease-in-out),
+            visibility 0s linear;
+        }
+
+        html.sidebar-leave-up .sidebar-bio {
+          grid-template-rows: 0fr;
+          opacity: 0;
+          visibility: hidden;
+          transition:
+            grid-template-rows 450ms var(--ease-in-out),
+            opacity 450ms var(--ease-in-out),
+            visibility 0s linear 450ms;
+        }
+
+        html.sidebar-leave-down .sidebar-bio {
+          grid-template-rows: 1fr;
+          opacity: 1;
+          visibility: visible;
+        }
+
+        html.sidebar-leave-up .stage,
+        html.sidebar-leave-down .stage {
+          pointer-events: none;
+          transition: transform 450ms var(--ease-in-out);
+        }
+
+        html.sidebar-leave-up .stage {
+          transform: translateY(calc(-1 * var(--sidebar-shift, 0px)));
+        }
+
+        html.sidebar-leave-down .stage {
+          transform: translateY(var(--sidebar-shift, 0px));
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .sidebar-bio,
+          .stage {
+            transition: none;
+          }
         }
 
         .is-about .mobile-nav {
           display: none;
-        }
-
-        .is-about .sidebar .nav {
-          margin-top: 0;
         }
 
         .stage {
