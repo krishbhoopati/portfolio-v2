@@ -81,11 +81,11 @@
                 <span class="copilot-mark"></span>
                 Copilot
               </div>
-              <div class="copilot-thread" id="copilot-thread"></div>
+              <div class="copilot-thread" id="copilot-thread" data-copilot-thread></div>
               <div class="copilot-composer" aria-hidden="true">
                 <div class="copilot-composer-bar">
                   <span class="copilot-plus" aria-hidden="true">+</span>
-                  <p class="copilot-composer-text is-placeholder" id="copilot-composer-text">Message Copilot</p>
+                  <p class="copilot-composer-text is-placeholder" id="copilot-composer-text" data-copilot-composer>Message Copilot</p>
                   <svg class="copilot-mic" viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M8 2.6a1.8 1.8 0 0 1 1.8 1.8v2.8a1.8 1.8 0 0 1-3.6 0V4.4A1.8 1.8 0 0 1 8 2.6z"/><path d="M4.8 7.4a3.2 3.2 0 0 0 6.4 0M8 10.6v2"/></svg>
                 </div>
                 <p class="copilot-note">AI-generated content may be incorrect</p>
@@ -122,24 +122,11 @@
         </div>
       </article>
     </div>
+    <script type="module">
+      import { playCopilot } from "../copilot.js?v=1";
+      playCopilot(document.querySelector(".case-hero .copilot"));
+    </script>
     <script>
-      const copilotScript = [
-        {
-          role: "user",
-          text: "What did Krish do at Maple Leaf Foods?"
-        },
-        {
-          role: "assistant",
-          text: `At Maple Leaf Foods, Krish focused on helping teams work smarter by making AI more accessible and useful across the company.
-
-- He built a Power BI dashboard that gave leadership a clearer picture of how AI was being used across the organization, and worked with teams to find opportunities where AI could make their day-to-day work easier.
-- He also led Microsoft Copilot workshops across 6+ business functions, helping drive enterprise AI adoption to 91%.
-- On the technical side, he built automated workflows that saved around 6 hours per review cycle, along with an AI agent that turned a 3-hour weekly research and communications process into something that took just minutes.
-
-Throughout his internship, he worked with stakeholders and developers to turn real business problems into solutions that saved time, improved processes, and helped more people get value from AI.`
-        }
-      ];
-
       const menuButton = document.querySelector(".menu-button");
       const mobileNav = document.querySelector("#mobile-nav");
       menuButton.addEventListener("click", () => {
@@ -171,166 +158,6 @@ Throughout his internship, he worked with stakeholders and developers to turn re
         sections.forEach((section) => observer.observe(section));
       }
 
-      const copilotThread = document.querySelector("#copilot-thread");
-      const copilotComposer = document.querySelector("#copilot-composer-text");
-      const copilotPrompt = copilotScript.find((line) => line.role === "user");
-      const copilotAnswer = copilotScript.find((line) => line.role === "assistant");
-
-      function copilotWait(ms) {
-        return new Promise((resolve) => window.setTimeout(resolve, ms));
-      }
-
-      async function copilotType(node, text, ms) {
-        node.textContent = "";
-        for (const char of text) {
-          node.textContent += char;
-          if (copilotThread.contains(node)) {
-            copilotThread.scrollTop = copilotThread.scrollHeight;
-          }
-          await copilotWait(ms);
-        }
-      }
-
-      function copilotUserMessage(text) {
-        const message = document.createElement("div");
-        message.className = "copilot-msg copilot-msg-user";
-        const body = document.createElement("p");
-        body.textContent = text;
-        message.append(body);
-        copilotThread.append(message);
-      }
-
-      function copilotBlocks(text) {
-        const blocks = [];
-        let list = null;
-        for (const raw of text.split("\n")) {
-          const line = raw.trim();
-          if (!line) {
-            list = null;
-            continue;
-          }
-          if (line.startsWith("- ")) {
-            if (!list) {
-              list = { type: "list", items: [] };
-              blocks.push(list);
-            }
-            list.items.push(line.slice(2));
-            continue;
-          }
-          list = null;
-          blocks.push({ type: "p", text: line });
-        }
-        return blocks;
-      }
-
-      function copilotAssistantMessage() {
-        const message = document.createElement("div");
-        message.className = "copilot-msg copilot-msg-assistant";
-        const mark = document.createElement("span");
-        mark.className = "copilot-mark";
-        mark.setAttribute("aria-hidden", "true");
-        const body = document.createElement("div");
-        body.className = "copilot-msg-body";
-        body.setAttribute("role", "status");
-        const finalText = document.createElement("span");
-        finalText.className = "copilot-sr";
-        body.append(finalText);
-        message.append(mark, body);
-        copilotThread.append(message);
-        return { body, finalText };
-      }
-
-      function copilotAppend(body, node) {
-        node.setAttribute("aria-hidden", "true");
-        body.insertBefore(node, body.querySelector(".copilot-sr"));
-        copilotThread.scrollTop = copilotThread.scrollHeight;
-        return node;
-      }
-
-      function copilotFillAnswer(body, text) {
-        for (const block of copilotBlocks(text)) {
-          if (block.type === "p") {
-            const paragraph = document.createElement("p");
-            paragraph.textContent = block.text;
-            copilotAppend(body, paragraph);
-            continue;
-          }
-          const list = document.createElement("ul");
-          list.className = "copilot-list";
-          for (const item of block.items) {
-            const entry = document.createElement("li");
-            entry.textContent = item;
-            list.append(entry);
-          }
-          copilotAppend(body, list);
-        }
-      }
-
-      async function copilotWriteAnswer(body, text, ms) {
-        for (const block of copilotBlocks(text)) {
-          if (block.type === "p") {
-            const paragraph = document.createElement("p");
-            paragraph.className = "copilot-stream is-typing";
-            copilotAppend(body, paragraph);
-            await copilotType(paragraph, block.text, ms);
-            paragraph.classList.remove("is-typing");
-            continue;
-          }
-          const list = document.createElement("ul");
-          list.className = "copilot-list";
-          copilotAppend(body, list);
-          for (const item of block.items) {
-            const entry = document.createElement("li");
-            entry.className = "copilot-stream is-typing";
-            list.append(entry);
-            copilotThread.scrollTop = copilotThread.scrollHeight;
-            await copilotType(entry, item, ms);
-            entry.classList.remove("is-typing");
-          }
-        }
-      }
-
-      function copilotTyping() {
-        const typing = document.createElement("div");
-        typing.className = "copilot-typing";
-        typing.setAttribute("aria-hidden", "true");
-        typing.innerHTML = "<span></span><span></span><span></span>";
-        copilotThread.append(typing);
-        return typing;
-      }
-
-      async function playCopilot() {
-        if (!copilotThread || !copilotComposer || !copilotPrompt || !copilotAnswer) return;
-        const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-        if (reduce) {
-          copilotUserMessage(copilotPrompt.text);
-          const answer = copilotAssistantMessage();
-          copilotFillAnswer(answer.body, copilotAnswer.text);
-          answer.finalText.textContent = copilotAnswer.text.replace(/^- /gm, "");
-          return;
-        }
-
-        copilotComposer.classList.remove("is-placeholder");
-        copilotComposer.classList.add("is-typing");
-        await copilotType(copilotComposer, copilotPrompt.text, 26);
-        copilotComposer.classList.remove("is-typing");
-        await copilotWait(360);
-        copilotComposer.textContent = "Message Copilot";
-        copilotComposer.classList.add("is-placeholder");
-        copilotUserMessage(copilotPrompt.text);
-
-        await copilotWait(420);
-        const typing = copilotTyping();
-        await copilotWait(680);
-        typing.remove();
-
-        const answer = copilotAssistantMessage();
-        await copilotWriteAnswer(answer.body, copilotAnswer.text, 14);
-        answer.finalText.textContent = copilotAnswer.text.replace(/^- /gm, "");
-        copilotThread.scrollTop = copilotThread.scrollHeight;
-      }
-
-      playCopilot();
     </script>
     <script type="module" src="../maple-ascii.js?v=8"></script>
   </body>

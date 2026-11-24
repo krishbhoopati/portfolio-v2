@@ -888,6 +888,11 @@
       .frame-maple .copilot-thread {
         gap: 10px;
         padding: 12px 12px 6px;
+        scrollbar-width: none;
+      }
+
+      .frame-maple .copilot-thread::-webkit-scrollbar {
+        display: none;
       }
 
       .frame-maple .copilot-msg {
